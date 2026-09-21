@@ -640,13 +640,3 @@ if __name__ == "__main__":
     debug_mode = os.getenv("FLASK_DEBUG", "True").lower() in ("true", "1", "yes")
     logger.info(f"Starting Flask server on port {port} (debug={debug_mode})...")
     app.run(host="0.0.0.0", port=port, debug=debug_mode)
-
-from flask import render_template
-
-@app.route('/collector')
-def collector_portal():
-    return render_template('collector.html')
-
-@app.route('/recycler')
-def recycler_portal():
-    return render_template('recycler.html')

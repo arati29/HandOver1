@@ -11,8 +11,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
 
-  <!-- Leaflet.js CSS -->
+  <!-- Leaflet.js CSS & JS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -50,574 +51,190 @@
 
   <style>
     body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    #map { height: 420px; width: 100%; border-radius: 1rem; }
     .leaflet-popup-content-wrapper {
       border-radius: 14px;
       box-shadow: 0 4px 20px -2px rgba(0,0,0,0.18);
       padding: 4px;
     }
     .leaflet-popup-content { margin: 8px 12px; }
-    .custom-recycler-pin {
-      background-color: #00652c;
-      color: white;
-      border: 2px solid white;
-      border-radius: 50%;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .user-gps-pin {
-      background-color: #2563eb;
-      color: white;
-      border: 3px solid white;
-      border-radius: 50%;
-      box-shadow: 0 0 0 6px rgba(37,99,235,0.3), 0 3px 10px rgba(0,0,0,0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      animation: pulse-gps 2s infinite;
-    }
-    @keyframes pulse-gps {
-      0% { box-shadow: 0 0 0 0 rgba(37,99,235,0.5), 0 3px 10px rgba(0,0,0,0.3); }
-      70% { box-shadow: 0 0 0 12px rgba(37,99,235,0), 0 3px 10px rgba(0,0,0,0.3); }
-      100% { box-shadow: 0 0 0 0 rgba(37,99,235,0), 0 3px 10px rgba(0,0,0,0.3); }
-    }
   </style>
 </head>
 <body class="bg-background text-on-surface min-h-screen flex flex-col">
 
-  <!-- Top Navigation Header -->
+  <!-- Header -->
   <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-surface-container-high shadow-sm px-4 lg:px-8 py-3.5">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       <div class="flex items-center gap-3">
-        <a href="/" title="Back to Dashboard">
-          <img alt="HandOver1 Brand Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1W8Ma8pLvOhzOnudPe5sV1FI6HhsXFZUcCPTaFSuXhvSD7W7AcZekKd4_e2fBo-PbP3iWd0dKfR0vsCqafhVbLs-GZDcoTS4Kmdyn218ym7fkIZyO4x9U6quR5U_gZ6tPa6c1eMr-3bPifezdOJKX60GCM2-meverEErDtojKjdTAss1fAzI52lF_79OX5MTADxEAgKynKkBRicPm1iuSzW79iQTGy_8f-wyJCIKmJvhpQiygvRnL56NF4"/>
-        </a>
+        <button onclick="location.href='/'" class="p-2 rounded-xl bg-surface-container-high hover:bg-surface-container text-on-surface transition-all">
+          <span class="material-symbols-outlined text-20px">arrow_back</span>
+        </button>
         <div>
-          <h1 class="text-lg font-extrabold text-on-surface leading-tight">HandOver1</h1>
-          <p class="text-xs font-bold text-secondary">Recycler Portal · Facility Operations & Network Map</p>
+          <h1 class="text-xl font-extrabold text-on-surface leading-tight">Recycler Portal</h1>
+          <p class="text-xs font-bold text-secondary">CPCB Facility Geo-Matching & Settlement</p>
         </div>
       </div>
-
-      <div class="flex items-center gap-3">
-        <div class="hidden md:flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container text-xs font-semibold text-primary">
-          <span class="material-symbols-outlined text-16px">verified_user</span>
-          <span>CPCB ID: MH-2024-EW88 (Verified Recycler)</span>
-        </div>
-
-        <a href="/collector" class="text-xs font-semibold text-on-surface-variant hover:text-primary px-3 py-1.5 rounded-lg border border-outline-variant hover:bg-surface-container transition-colors">
-          Switch to Collector View →
-        </a>
+      <div class="flex items-center gap-2">
+        <span class="px-3 py-1 rounded-full bg-primary/10 text-primary font-bold text-xs">Facility Operations</span>
       </div>
     </div>
   </header>
 
-  <!-- Main Operations Dashboard -->
-  <main class="flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-6 space-y-6">
+  <!-- Main Body -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-8 space-y-8">
 
-    <!-- KPI Metric Cards -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      <div class="bg-surface-container-lowest rounded-2xl p-5 border border-surface-container shadow-sm flex flex-col justify-between">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Lots Pending Review</span>
-          <span class="w-8 h-8 rounded-xl bg-surface-container flex items-center justify-center text-primary">
-            <span class="material-symbols-outlined text-18px">pending_actions</span>
-          </span>
-        </div>
-        <div class="text-2xl font-extrabold text-on-surface">8 Lots</div>
-        <div class="mt-2 text-xs font-semibold text-primary flex items-center gap-1">
-          <span class="material-symbols-outlined text-14px">priority_high</span>
-          <span>3 High Grade PCB lots awaiting verification</span>
-        </div>
-      </div>
-
-      <div class="bg-surface-container-lowest rounded-2xl p-5 border border-surface-container shadow-sm flex flex-col justify-between">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Intake Capacity</span>
-          <span class="w-8 h-8 rounded-xl bg-surface-container flex items-center justify-center text-primary">
-            <span class="material-symbols-outlined text-18px">scale</span>
-          </span>
-        </div>
-        <div class="text-2xl font-extrabold text-on-surface">2.4 MT <span class="text-xs font-semibold text-on-surface-variant">/ 4.0 MT</span></div>
-        <div class="w-full bg-surface-container-high h-2 rounded-full mt-2 overflow-hidden">
-          <div class="bg-primary h-full rounded-full" style="width: 60%"></div>
-        </div>
-      </div>
-
-      <div class="bg-surface-container-lowest rounded-2xl p-5 border border-surface-container shadow-sm flex flex-col justify-between">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-xs font-bold uppercase tracking-wider text-on-surface-variant">CPCB EPR Credits</span>
-          <span class="w-8 h-8 rounded-xl bg-surface-container flex items-center justify-center text-primary">
-            <span class="material-symbols-outlined text-18px">verified</span>
-          </span>
-        </div>
-        <div class="text-2xl font-extrabold text-primary">14.8 MT</div>
-        <div class="mt-2 text-xs font-semibold text-on-surface-variant flex items-center gap-1">
-          <span class="material-symbols-outlined text-14px text-primary">cloud_done</span>
-          <span>Form-6 Manifests synced to CPCB Portal</span>
-        </div>
-      </div>
-
-      <div class="bg-surface-container-lowest rounded-2xl p-5 border border-surface-container shadow-sm flex flex-col justify-between">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Settlements Disbursed</span>
-          <span class="w-8 h-8 rounded-xl bg-surface-container flex items-center justify-center text-primary">
-            <span class="material-symbols-outlined text-18px">payments</span>
-          </span>
-        </div>
-        <div class="text-2xl font-extrabold text-on-surface">₹1,84,500</div>
-        <div class="mt-2 text-xs font-semibold text-primary flex items-center gap-1">
-          <span class="w-2 h-2 rounded-full bg-primary"></span>
-          <span>92% Instant UPI · 8% Gate Cash</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Interactive Leaflet.js Recycler Network Map Section -->
-    <div class="bg-surface-container-lowest rounded-2xl p-6 border border-surface-container shadow-sm space-y-4">
-      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+    <!-- Interactive Facility Map & Filters -->
+    <div class="bg-surface-container-lowest rounded-2xl p-6 border border-surface-container-high shadow-sm space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-primary text-24px">map</span>
-            <h2 class="text-lg font-extrabold text-on-surface">Recycler Network & Facilities Map</h2>
-          </div>
-          <p class="text-xs text-on-surface-variant mt-0.5">
-            Initializes with browser GPS location to find certified processing facilities and drop-off hubs.
-          </p>
+          <h2 class="text-lg font-extrabold text-on-surface">Verified Processing Facilities</h2>
+          <p class="text-xs text-on-surface-variant font-medium">Filter matching facilities by material stream or locate via live GPS</p>
         </div>
 
-        <!-- Filter Buttons by Material -->
-        <div class="flex flex-wrap items-center gap-2">
-          <button type="button" class="category-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-primary text-white transition-all shadow-sm" data-category="">
-            All Streams
-          </button>
-          <button type="button" class="category-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-surface-container text-on-surface hover:bg-surface-container-high transition-all" data-category="PCB">
-            PCB / Motherboards
-          </button>
-          <button type="button" class="category-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-surface-container text-on-surface hover:bg-surface-container-high transition-all" data-category="Copper">
-            Copper
-          </button>
-          <button type="button" class="category-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-surface-container text-on-surface hover:bg-surface-container-high transition-all" data-category="Batteries">
-            Batteries
-          </button>
-          <button type="button" class="category-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-surface-container text-on-surface hover:bg-surface-container-high transition-all" data-category="Displays">
-            Displays
-          </button>
-          <button type="button" id="recenterGpsBtn" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-blue-50 text-blue-700 hover:bg-blue-100 border border-blue-200 flex items-center gap-1 transition-all" title="Recenter to your current GPS position">
-            <span class="material-symbols-outlined text-14px">my_location</span>
-            GPS Location
-          </button>
+        <!-- Filter Buttons -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-1">
+          <button onclick="filterCategory('')" class="filter-btn active px-3 py-1.5 rounded-xl bg-primary text-white text-xs font-bold transition-all shrink-0">All</button>
+          <button onclick="filterCategory('Motherboards')" class="filter-btn px-3 py-1.5 rounded-xl bg-surface-container-high text-on-surface text-xs font-bold transition-all shrink-0">Motherboards</button>
+          <button onclick="filterCategory('Copper')" class="filter-btn px-3 py-1.5 rounded-xl bg-surface-container-high text-on-surface text-xs font-bold transition-all shrink-0">Copper</button>
+          <button onclick="filterCategory('Batteries')" class="filter-btn px-3 py-1.5 rounded-xl bg-surface-container-high text-on-surface text-xs font-bold transition-all shrink-0">Batteries</button>
         </div>
       </div>
 
       <!-- Map Container -->
-      <div class="relative w-full rounded-2xl overflow-hidden border border-outline-variant shadow-inner" style="min-height: 480px;">
-        <div id="map" class="w-full h-full min-h-[480px]"></div>
+      <div id="map" class="shadow-inner border border-surface-container"></div>
+    </div>
 
-        <!-- Live Map Status Indicator -->
-        <div class="absolute top-3 right-3 z-[1000] bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-xl shadow-md border border-surface-container text-xs flex items-center gap-2">
-          <span id="gpsIndicatorDot" class="w-2 h-2 rounded-full bg-blue-600 animate-ping"></span>
-          <span id="gpsStatusMessage" class="font-semibold text-on-surface">Locating browser GPS...</span>
-        </div>
+    <!-- Settlement & QA Form -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-        <!-- Overlay Legend -->
-        <div class="absolute bottom-3 left-3 z-[1000] bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-xl shadow-md border border-surface-container text-xs flex items-center gap-3">
-          <div class="flex items-center gap-1.5">
-            <div class="w-3.5 h-3.5 rounded-full bg-blue-600 border border-white"></div>
-            <span class="font-semibold text-on-surface">Your GPS</span>
-          </div>
-          <span class="text-outline-variant">|</span>
-          <div class="flex items-center gap-1.5">
-            <div class="w-3.5 h-3.5 rounded-full bg-primary border border-white"></div>
-            <span class="font-semibold text-on-surface">Certified Recycler</span>
-          </div>
-          <span class="text-outline-variant">|</span>
-          <span id="facilitiesCountText" class="font-bold text-primary">0 facilities</span>
-        </div>
-      </div>
-
-      <!-- Facility Cards Grid under Map -->
-      <div class="pt-2">
-        <h3 class="text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-2.5">
-          Matched Recyclers in Network (<span id="matchedCount">0</span>)
+      <!-- Complete Settlement Card -->
+      <div class="bg-surface-container-lowest rounded-2xl p-6 border border-surface-container-high shadow-sm space-y-4">
+        <h3 class="text-base font-extrabold text-on-surface flex items-center gap-2">
+          <span class="material-symbols-outlined text-primary">fact_check</span>
+          Weighment & QA Settlement
         </h3>
-        <div id="recyclerCardsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          <div class="p-3.5 rounded-xl bg-surface-container-low border border-surface-container text-xs text-on-surface-variant animate-pulse">
-            Loading facility details...
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- Weight & QA Verification / Transaction Settlement Modal Section -->
-    <div class="bg-surface-container-lowest rounded-2xl p-6 border border-surface-container shadow-sm space-y-4">
-      <div class="flex items-center justify-between border-b border-surface-container pb-4">
-        <div>
-          <h2 class="text-lg font-extrabold text-on-surface">Facility Weighment QA & Settlement</h2>
-          <p class="text-xs text-on-surface-variant mt-0.5">Verify scale weight, finalize settlement price, and issue CPCB Form-6 digital QR code.</p>
-        </div>
-        <span class="text-xs font-bold bg-primary/10 text-primary px-3 py-1 rounded-full">Gate QA Active</span>
-      </div>
-
-      <form id="settlementForm" class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-1.5">Lot ID / Reference</label>
-          <input type="text" id="settleLotId" placeholder="e.g. 7D2038FD" value="7D2038FD" required
-            class="w-full bg-surface-container-low rounded-xl px-3.5 py-2.5 text-xs font-bold text-on-surface border border-outline-variant focus:outline-none focus:border-primary"/>
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-1.5">Verified Final Weight (KG)</label>
-          <input type="number" step="0.1" id="settleWeight" placeholder="e.g. 12.5" value="12.5" required
-            class="w-full bg-surface-container-low rounded-xl px-3.5 py-2.5 text-xs font-bold text-on-surface border border-outline-variant focus:outline-none focus:border-primary"/>
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-1.5">Settlement Amount (₹)</label>
-          <input type="number" step="1" id="settlePrice" placeholder="e.g. 7250" value="7250" required
-            class="w-full bg-surface-container-low rounded-xl px-3.5 py-2.5 text-xs font-bold text-primary border border-outline-variant focus:outline-none focus:border-primary"/>
-        </div>
-
-        <div class="md:col-span-3 flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
-          <div class="flex items-center gap-3 text-xs font-semibold text-on-surface">
-            <span>Payment Method:</span>
-            <label class="flex items-center gap-1.5 cursor-pointer">
-              <input type="radio" name="payMethod" value="UPI" checked class="accent-primary"/>
-              <span>Instant UPI (Auto-Settled)</span>
-            </label>
-            <label class="flex items-center gap-1.5 cursor-pointer">
-              <input type="radio" name="payMethod" value="CASH" class="accent-primary"/>
-              <span>Cash at Gate</span>
-            </label>
+        <form id="settlementForm" onsubmit="handleSettlement(event)" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold text-on-surface-variant mb-1">Lot / Transaction Reference ID</label>
+            <input type="text" id="lotId" required placeholder="e.g. LOT-A91B82" class="w-full px-4 py-2.5 rounded-xl bg-surface-container-low border border-surface-container text-xs font-bold focus:outline-none focus:border-primary"/>
           </div>
 
-          <button type="submit" id="completeTxBtn" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-primary hover:bg-primary-container text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md transition-all">
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold text-on-surface-variant mb-1">Verified Net Weight (kg)</label>
+              <input type="number" step="0.1" id="finalWeight" required placeholder="12.5" class="w-full px-4 py-2.5 rounded-xl bg-surface-container-low border border-surface-container text-xs font-bold focus:outline-none focus:border-primary"/>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-on-surface-variant mb-1">Final Agreed Amount (₹)</label>
+              <input type="number" step="1" id="finalPrice" required placeholder="4250" class="w-full px-4 py-2.5 rounded-xl bg-surface-container-low border border-surface-container text-xs font-bold focus:outline-none focus:border-primary"/>
+            </div>
+          </div>
+
+          <button type="submit" class="w-full py-3 rounded-xl bg-primary hover:bg-primary-container text-white font-bold text-xs shadow-sm transition-all flex items-center justify-center gap-2">
             <span class="material-symbols-outlined text-18px">check_circle</span>
-            <span>Complete Transaction & Generate QR Code</span>
+            Record QA & Complete Settlement
           </button>
-        </div>
-      </form>
-
-      <!-- Completed Transaction & QR Result Card -->
-      <div id="txResultCard" class="hidden mt-4 p-5 rounded-2xl bg-gradient-to-br from-white to-surface-container-low border-2 border-primary/30 flex flex-col md:flex-row items-center justify-between gap-6">
-        <div class="space-y-2 text-center md:text-left">
-          <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-primary text-white">
-            <span class="material-symbols-outlined text-14px">verified</span>
-            Transaction Recorded & Lot Status: COMPLETED
-          </span>
-          <h3 class="text-xl font-extrabold text-on-surface">CPCB Form-6 Handover Manifest</h3>
-          <p class="text-xs text-on-surface-variant max-w-md">
-            The weight, settlement, and GPS geo-tag have been locked in the database. Scan the QR code below for official digital manifest verification.
-          </p>
-          <div class="flex flex-wrap items-center gap-3 pt-2 text-xs font-bold text-on-surface">
-            <span class="bg-surface-container px-3 py-1 rounded-lg">Lot: <strong id="resLotId">-</strong></span>
-            <span class="bg-surface-container px-3 py-1 rounded-lg">Weight: <strong id="resWeight">-</strong></span>
-            <span class="bg-surface-container px-3 py-1 rounded-lg text-primary">Amount: <strong id="resPrice">-</strong></span>
-          </div>
-        </div>
-
-        <div class="p-3 bg-white rounded-xl shadow-md border border-surface-container text-center flex-shrink-0">
-          <img id="qrImage" alt="Transaction QR Code" class="w-36 h-36 mx-auto object-contain"/>
-          <p class="text-[10px] font-bold text-on-surface-variant mt-1.5">Official Digital Manifest QR</p>
-        </div>
+        </form>
       </div>
-    </div>
 
+      <!-- Instant CPCB QR Manifest Display -->
+      <div class="bg-surface-container-lowest rounded-2xl p-6 border border-surface-container-high shadow-sm flex flex-col items-center justify-center text-center space-y-3">
+        <h3 class="text-base font-extrabold text-on-surface">Digital Form-6 QR Manifest</h3>
+        <p class="text-xs text-on-surface-variant">Generated dynamically from backend once transaction completes</p>
+
+        <div id="qrBox" class="w-48 h-48 rounded-xl border border-dashed border-outline-variant flex items-center justify-center bg-surface-container-low p-2">
+          <span class="text-xs font-semibold text-on-surface-variant">Pending Settlement...</span>
+        </div>
+
+        <a id="qrDownloadLink" style="display:none;" class="text-xs font-bold text-primary hover:underline" target="_blank">Download High-Res QR Code</a>
+      </div>
+
+    </div>
   </main>
 
-  <!-- Leaflet.js Library -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
-  <!-- Interactive Map & Operations Script -->
   <script>
-    // State
-    let map = null;
-    let markersLayer = null;
-    let userGpsMarker = null;
-    let userLocation = [19.0760, 72.8777]; // Default: Mumbai / Western India hub
-    let activeCategory = "";
+    let map, markersGroup;
 
-    // DOM Elements
-    const gpsStatusMessage = document.getElementById("gpsStatusMessage");
-    const gpsIndicatorDot = document.getElementById("gpsIndicatorDot");
-    const recenterGpsBtn = document.getElementById("recenterGpsBtn");
-    const facilitiesCountText = document.getElementById("facilitiesCountText");
-    const matchedCount = document.getElementById("matchedCount");
-    const recyclerCardsGrid = document.getElementById("recyclerCardsGrid");
-    const categoryFilterBtns = document.querySelectorAll(".category-filter-btn");
-
-    const settlementForm = document.getElementById("settlementForm");
-    const settleLotId = document.getElementById("settleLotId");
-    const settleWeight = document.getElementById("settleWeight");
-    const settlePrice = document.getElementById("settlePrice");
-    const completeTxBtn = document.getElementById("completeTxBtn");
-    const txResultCard = document.getElementById("txResultCard");
-    const resLotId = document.getElementById("resLotId");
-    const resWeight = document.getElementById("resWeight");
-    const resPrice = document.getElementById("resPrice");
-    const qrImage = document.getElementById("qrImage");
-
-    // Initialize Leaflet Map
-    function initMap() {
-      map = L.map('map', {
-        zoomControl: true,
-        attributionControl: false
-      }).setView(userLocation, 11);
+    document.addEventListener('DOMContentLoaded', () => {
+      // Default map center (Navi Mumbai / Thane area)
+      map = L.map('map').setView([19.1000, 73.0000], 10);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19
+        attribution: '&copy; OpenStreetMap contributors'
       }).addTo(map);
 
-      markersLayer = L.layerGroup().addTo(map);
-      L.control.attribution({ position: 'bottomright', prefix: 'Leaflet | © OpenStreetMap' }).addTo(map);
-
-      // Attempt Browser GPS Geolocation
-      acquireBrowserGps();
-    }
-
-    // Acquire Browser GPS Position
-    function acquireBrowserGps() {
-      if (!navigator.geolocation) {
-        gpsStatusMessage.textContent = "GPS not supported · Using Regional Hub";
-        gpsIndicatorDot.classList.remove("bg-blue-600", "animate-ping");
-        gpsIndicatorDot.classList.add("bg-outline");
-        return;
-      }
-
-      gpsStatusMessage.textContent = "Acquiring GPS location...";
-
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          userLocation = [pos.coords.latitude, pos.coords.longitude];
-          gpsStatusMessage.textContent = `GPS Active: ${pos.coords.latitude.toFixed(4)}, ${pos.coords.longitude.toFixed(4)}`;
-          gpsIndicatorDot.classList.remove("animate-ping");
-          gpsIndicatorDot.classList.add("bg-blue-600");
-
-          // Add User GPS Marker
-          if (userGpsMarker) {
-            userGpsMarker.setLatLng(userLocation);
-          } else {
-            const gpsIcon = L.divIcon({
-              className: 'user-gps-pin',
-              html: `<div style="width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:14px;">📍</div>`,
-              iconSize: [30, 30],
-              iconAnchor: [15, 15]
-            });
-
-            userGpsMarker = L.marker(userLocation, { icon: gpsIcon })
-              .bindPopup("<b>Your Current Position</b><br>GPS Geolocation Active")
-              .addTo(map);
-          }
-
-          map.setView(userLocation, 12, { animate: true });
-        },
-        (err) => {
-          console.debug("GPS permission / timeout:", err);
-          gpsStatusMessage.textContent = "GPS Unavailable · Default Hub Active";
-          gpsIndicatorDot.classList.remove("animate-ping");
-          gpsIndicatorDot.classList.add("bg-outline");
-        },
-        { enableHighAccuracy: true, timeout: 8000, maximumAge: 60000 }
-      );
-    }
-
-    // Recenter map on GPS
-    recenterGpsBtn.addEventListener("click", () => {
-      if (userGpsMarker) {
-        map.setView(userGpsMarker.getLatLng(), 13, { animate: true });
-        userGpsMarker.openPopup();
-      } else {
-        acquireBrowserGps();
-      }
+      markersGroup = L.layerGroup().addTo(map);
+      loadRecyclers('');
     });
 
-    // Custom Green Recycler Pin Icon
-    function createRecyclerIcon(number) {
-      return L.divIcon({
-        className: 'custom-recycler-pin',
-        html: `<div style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;">♻️</div>`,
-        iconSize: [36, 36],
-        iconAnchor: [18, 18],
-        popupAnchor: [0, -18]
-      });
-    }
-
-    // Fetch matching recyclers from /api/recyclers/match?category=...
-    async function loadMatchingRecyclers(category = "") {
-      activeCategory = category;
-      const url = category ? `/api/recyclers/match?category=${encodeURIComponent(category)}` : `/api/recyclers/match`;
-
+    async function loadRecyclers(category) {
+      markersGroup.clearLayers();
       try {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error("Failed to load facilities");
+        const res = await fetch(`/api/recyclers/match?category=${encodeURIComponent(category)}`);
+        const recyclers = await res.json();
 
-        const data = await response.json();
-        const recyclers = Array.isArray(data) ? data : (data.recyclers || []);
-        renderRecyclerMarkers(recyclers);
+        if (Array.isArray(recyclers)) {
+          recyclers.forEach(r => {
+            if (r.lat && r.long) {
+              const marker = L.marker([r.lat, r.long]).addTo(markersGroup);
+              const accepted = Array.isArray(r.accepted_materials) ? r.accepted_materials.join(', ') : '';
+              marker.bindPopup(`
+                <div class="font-sans">
+                  <h4 class="font-bold text-sm text-primary">${r.name}</h4>
+                  <p class="text-xs text-gray-600 mt-1">${r.address}</p>
+                  <p class="text-xs font-semibold text-gray-800 mt-1">Accepts: ${accepted}</p>
+                </div>
+              `);
+            }
+          });
+        }
       } catch (e) {
-        console.error("Error loading recyclers:", e);
-        recyclerCardsGrid.innerHTML = `
-          <div class="col-span-full p-4 rounded-xl bg-error/10 text-error text-xs font-semibold text-center">
-            Could not retrieve recycler locations: ${e.message}
-          </div>
-        `;
+        console.error("Failed to load recyclers:", e);
       }
     }
 
-    // Render Markers on Map & Cards Below
-    function renderRecyclerMarkers(recyclers) {
-      if (!map || !markersLayer) return;
-
-      markersLayer.clearLayers();
-      recyclerCardsGrid.innerHTML = "";
-
-      facilitiesCountText.textContent = `${recyclers.length} facilities`;
-      matchedCount.textContent = recyclers.length;
-
-      if (!recyclers || recyclers.length === 0) {
-        recyclerCardsGrid.innerHTML = `
-          <div class="col-span-full p-4 rounded-xl bg-surface-container-low text-on-surface-variant text-xs font-semibold text-center">
-            No facilities currently matching "${activeCategory}".
-          </div>
-        `;
-        return;
-      }
-
-      const bounds = [];
-      if (userGpsMarker) {
-        bounds.push(userGpsMarker.getLatLng());
-      }
-
-      recyclers.forEach((r, idx) => {
-        const lat = parseFloat(r.lat || r.latitude);
-        const lng = parseFloat(r.long || r.lng || r.longitude);
-
-        if (!isNaN(lat) && !isNaN(lng)) {
-          bounds.push([lat, lng]);
-
-          const marker = L.marker([lat, lng], {
-            icon: createRecyclerIcon(idx + 1)
-          });
-
-          // Materials badges
-          let materialsHtml = "";
-          if (Array.isArray(r.accepted_materials)) {
-            materialsHtml = r.accepted_materials.map(m => `<span style="background:#eaedff; color:#00652c; padding:2px 6px; border-radius:4px; font-size:10px; font-weight:700;">${m}</span>`).join(" ");
-          } else if (r.accepted_materials) {
-            materialsHtml = `<span style="background:#eaedff; color:#00652c; padding:2px 6px; border-radius:4px; font-size:10px; font-weight:700;">${r.accepted_materials}</span>`;
-          }
-
-          const popupHtml = `
-            <div style="font-family:'Plus Jakarta Sans',sans-serif; min-width:200px;">
-              <div style="font-size:13px; font-weight:800; color:#131b2e; margin-bottom:2px;">${r.name || 'Verified Recycler'}</div>
-              <div style="font-size:11px; color:#6f7a6e; margin-bottom:6px;">${r.address || 'Certified Facility'}</div>
-              <div style="margin-bottom:6px; display:flex; flex-wrap:wrap; gap:3px;">${materialsHtml}</div>
-              <div style="font-size:10px; font-weight:800; color:#00652c; border-top:1px solid #eaedff; padding-top:4px;">
-                ✓ CPCB Authorized Facility
-              </div>
-            </div>
-          `;
-
-          marker.bindPopup(popupHtml);
-          markersLayer.addLayer(marker);
-
-          // Card in grid below
-          const card = document.createElement("div");
-          card.className = "p-3.5 rounded-xl bg-surface-container-low hover:bg-surface-container border border-surface-container transition-all cursor-pointer flex flex-col justify-between";
-          card.innerHTML = `
-            <div>
-              <div class="flex items-center justify-between">
-                <span class="font-bold text-xs text-on-surface truncate">${r.name || 'Certified Facility'}</span>
-                <span class="text-[10px] font-extrabold text-primary bg-primary/10 px-1.5 py-0.5 rounded">CPCB Active</span>
-              </div>
-              <p class="text-[11px] text-on-surface-variant line-clamp-2 mt-1">${r.address || 'Processing Facility'}</p>
-            </div>
-            <div class="mt-3 pt-2 border-t border-surface-container flex items-center justify-between text-[10px] text-on-surface-variant font-medium">
-              <span>📍 ${lat.toFixed(3)}, ${lng.toFixed(3)}</span>
-              <span class="font-bold text-primary hover:underline">Focus ↗</span>
-            </div>
-          `;
-
-          card.addEventListener("click", () => {
-            map.setView([lat, lng], 14, { animate: true });
-            marker.openPopup();
-          });
-
-          recyclerCardsGrid.appendChild(card);
-        }
+    function filterCategory(cat) {
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('bg-primary', 'text-white');
+        btn.classList.add('bg-surface-container-high', 'text-on-surface');
       });
-
-      if (bounds.length > 0) {
-        map.fitBounds(bounds, { padding: [40, 40], maxZoom: 13 });
-      }
+      event.target.classList.remove('bg-surface-container-high', 'text-on-surface');
+      event.target.classList.add('bg-primary', 'text-white');
+      loadRecyclers(cat);
     }
 
-    // Category Filter Buttons Handler
-    categoryFilterBtns.forEach(btn => {
-      btn.addEventListener("click", () => {
-        categoryFilterBtns.forEach(b => {
-          b.className = "category-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-surface-container text-on-surface hover:bg-surface-container-high transition-all";
-        });
-        btn.className = "category-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-primary text-white transition-all shadow-sm";
-        loadMatchingRecyclers(btn.dataset.category || "");
-      });
-    });
-
-    // Handle Settlement Form Submission -> POST /api/transactions/complete
-    settlementForm.addEventListener("submit", async (e) => {
+    async function handleSettlement(e) {
       e.preventDefault();
-
-      const lotId = settleLotId.value.trim();
-      const weight = parseFloat(settleWeight.value);
-      const price = parseFloat(settlePrice.value);
-      const payMethod = document.querySelector('input[name="payMethod"]:checked')?.value || "UPI";
-
-      completeTxBtn.disabled = true;
-      completeTxBtn.classList.add("opacity-80", "cursor-not-allowed");
+      const lotId = document.getElementById('lotId').value;
+      const finalWeight = document.getElementById('finalWeight').value;
+      const finalPrice = document.getElementById('finalPrice').value;
 
       try {
-        const response = await fetch("/api/transactions/complete", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            lot_id: lotId,
-            final_weight: weight,
-            final_price: price,
-            payment_status: `${payMethod}_COMPLETED`
-          })
+        const res = await fetch('/api/transactions/complete', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ lot_id: lotId, final_weight: finalWeight, final_price: finalPrice })
         });
+        const data = await res.json();
 
-        if (!response.ok) {
-          throw new Error(`Server returned HTTP ${response.status}`);
+        if (res.ok && data.success) {
+          const qrUrl = `/api/transactions/${data.transaction.id}/qr`;
+          const qrBox = document.getElementById('qrBox');
+          qrBox.innerHTML = `<img src="${qrUrl}" alt="Transaction QR" class="w-full h-full object-contain rounded-lg"/>`;
+          
+          const dlLink = document.getElementById('qrDownloadLink');
+          dlLink.href = qrUrl;
+          dlLink.style.display = 'inline-block';
+          
+          alert("Transaction recorded & completed successfully!");
+        } else {
+          alert("Error completing transaction: " + (data.error || "Unknown error"));
         }
-
-        const data = await response.json();
-
-        // Update result display
-        resLotId.textContent = `#LOT-${lotId}`;
-        resWeight.textContent = `${weight} kg`;
-        resPrice.textContent = `₹${price.toLocaleString('en-IN')}`;
-        
-        // Fetch generated QR code image
-        qrImage.src = `/api/transactions/${encodeURIComponent(lotId)}/qr?ref=CPCB-FORM6-LOT-${encodeURIComponent(lotId)}-PRICE-INR-${price}`;
-
-        txResultCard.classList.remove("hidden");
-        txResultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-
       } catch (err) {
-        console.error("Settlement error:", err);
-        alert(`Failed to complete transaction: ${err.message}`);
-      } finally {
-        completeTxBtn.disabled = false;
-        completeTxBtn.classList.remove("opacity-80", "cursor-not-allowed");
+        alert("Network error submitting settlement: " + err.message);
       }
-    });
-
-    // Bootstrapping on DOM Load
-    window.addEventListener("DOMContentLoaded", () => {
-      initMap();
-      loadMatchingRecyclers();
-    });
+    }
   </script>
 </body>
 </html>
