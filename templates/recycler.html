@@ -1,558 +1,623 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>HandOver1 - Recycler Operations & Facility Hub</title>
 
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"background":"#faf8ff","on-primary-container":"#d3ffd5","outline":"#6f7a6e","on-primary":"#ffffff","surface-container-low":"#f2f3ff","inverse-on-surface":"#eef0ff","outline-variant":"#becabc","surface-variant":"#dae2fd","on-error-container":"#93000a","on-background":"#131b2e","on-tertiary-fixed-variant":"#003ea8","secondary-fixed":"#ffdcc3","error":"#ba1a1a","surface-container-lowest":"#ffffff","tertiary-fixed-dim":"#b4c5ff","surface-dim":"#d2d9f4","on-primary-fixed":"#00210a","surface-container-high":"#e2e7ff","secondary-fixed-dim":"#ffb77d","primary-fixed-dim":"#79db8d","on-secondary-fixed-variant":"#6e3900","tertiary":"#004cca","surface-container-highest":"#dae2fd","primary-fixed":"#95f8a7","on-error":"#ffffff","inverse-primary":"#79db8d","primary-container":"#15803d","tertiary-container":"#2865ed","on-tertiary-container":"#f2f2ff","on-tertiary-fixed":"#00174b","on-surface":"#131b2e","on-secondary-fixed":"#2f1500","secondary":"#904d00","secondary-container":"#fe932c","on-secondary":"#ffffff","inverse-surface":"#283044","surface-bright":"#faf8ff","on-secondary-container":"#663500","surface-container":"#eaedff","on-primary-fixed-variant":"#005323","primary":"#00652c","error-container":"#ffdad6","on-tertiary":"#ffffff","tertiary-fixed":"#dbe1ff","on-surface-variant":"#3f493f","surface-tint":"#006d30","surface":"#faf8ff"},borderRadius:{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},spacing:{"space-xs":"0.25rem","space-lg":"1.5rem","space-xl":"2rem","margin":"1rem","gutter":"1rem","space-md":"1rem","space-sm":"0.5rem"},fontFamily:{"display-currency":["Plus Jakarta Sans"],"body-xl":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"dual-sub":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"label-badge":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"label-action":["Plus Jakarta Sans"]},fontSize:{"display-currency":["40px",{lineHeight:"48px",letterSpacing:"-0.02em",fontWeight:"800"}],"body-xl":["18px",{lineHeight:"26px",fontWeight:"600"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"500"}],"headline-lg":["30px",{lineHeight:"38px",fontWeight:"800"}],"dual-sub":["13px",{lineHeight:"18px",fontWeight:"600"}],"headline-md":["24px",{lineHeight:"32px",fontWeight:"700"}],"headline-sm":["20px",{lineHeight:"28px",fontWeight:"700"}],"label-badge":["14px",{lineHeight:"18px",letterSpacing:"0.04em",fontWeight:"700"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"500"}],"label-action":["18px",{lineHeight:"24px",letterSpacing:"0.02em",fontWeight:"700"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-low z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col"><div class="h-16 px-6 flex items-center gap-3 bg-surface-container"><span class="material-symbols-outlined text-primary text-[24px]">recycling</span><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface leading-none">Operations</span><span class="font-dual-sub text-dual-sub text-on-surface-variant leading-none mt-1">Recycler Portal Hub</span></div></div><div class="px-4 py-4"><nav class="flex flex-col gap-1" data-active-classes="bg-primary text-on-primary font-body-md shadow-[0_2px_4px_rgba(0,0,0,0.08)]"><a aria-current="page" class="flex items-center justify-between px-3 py-3 rounded-lg transition-colors bg-primary text-on-primary font-body-md shadow-[0_2px_4px_rgba(0,0,0,0.08)]" data-path="incoming-lot-requests" href="#"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-[20px]">move_to_inbox</span><span class="font-body-md text-body-md">Incoming Lot Requests</span></div><span class="px-2 py-0.5 rounded-full bg-secondary text-on-secondary font-label-badge text-label-badge">8</span></a><a class="flex items-center gap-3 px-3 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="facility-inventory" href="#"><span class="material-symbols-outlined text-[20px]">warehouse</span><span class="font-body-md text-body-md">Facility Inventory</span></a><a class="flex items-center gap-3 px-3 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="weight-qa-verification" href="#"><span class="material-symbols-outlined text-[20px]">scale</span><span class="font-body-md text-body-md">Weight &amp; QA Verification</span></a><a class="flex items-center gap-3 px-3 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="payments-settlements" href="#"><span class="material-symbols-outlined text-[20px]">payments</span><span class="font-body-md text-body-md">Payments &amp; Settlements</span></a><a class="flex items-center gap-3 px-3 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="cpcb-form-6-manifests" href="#"><span class="material-symbols-outlined text-[20px]">description</span><span class="font-body-md text-body-md">CPCB Form-6 Manifests</span></a><a class="flex items-center gap-3 px-3 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="epr-credit-reports" href="#"><span class="material-symbols-outlined text-[20px]">eco</span><span class="font-body-md text-body-md">EPR Credit Reports</span></a><a class="flex items-center gap-3 px-3 py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="settings" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span class="font-body-md text-body-md">Settings</span></a></nav></div></div><div class="p-4 m-4 rounded-xl bg-surface-container flex flex-col gap-2"><div class="flex items-center gap-2 text-primary"><span class="material-symbols-outlined text-[20px]">verified</span><span class="font-label-badge text-label-badge uppercase tracking-wide">Compliance</span></div><span class="font-dual-sub text-dual-sub text-on-surface">Audit cycle: Q3 Validated</span><span class="font-dual-sub text-dual-sub text-on-surface-variant">Next CPCB Inspection: 28 Oct</span></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-between px-6"><div class="flex items-center gap-4"><div class="flex items-center gap-3"><img alt="Brand logo. - Primary color: #15803d
-- Font: plusJakartaSans
-- Mode: light
-- Roundness: rounded-md
-" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1W8Ma8pLvOhzOnudPe5sV1FI6HhsXFZUcCPTaFSuXhvSD7W7AcZekKd4_e2fBo-PbP3iWd0dKfR0vsCqafhVbLs-GZDcoTS4Kmdyn218ym7fkIZyO4x9U6quR5U_gZ6tPa6c1eMr-3bPifezdOJKX60GCM2-meverEErDtojKjdTAss1fAzI52lF_79OX5MTADxEAgKynKkBRicPm1iuSzW79iQTGy_8f-wyJCIKmJvhpQiygvRnL56NF4"/><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight whitespace-nowrap">HandOver1 Recycler Portal</span></div><div class="hidden xl:flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container text-primary font-label-badge text-label-badge"><span class="material-symbols-outlined text-[16px]">verified_user</span><span>CPCB ID: MH-2024-EW88 - Verified Green Recycler</span></div></div><div class="flex items-center gap-5"><div class="hidden lg:flex items-center gap-3 px-3 py-1.5 rounded-full bg-surface-container-high"><span class="font-label-badge text-label-badge text-on-surface-variant flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>MARKET INDEX</span><div class="flex items-center gap-2 text-on-surface font-dual-sub text-dual-sub"><span>Motherboards <strong class="text-primary">₹580/kg</strong></span><span class="text-outline-variant">|</span><span>Copper <strong class="text-primary">₹710/kg</strong></span><span class="text-outline-variant">|</span><span>Batteries <strong class="text-primary">₹180/kg</strong></span></div></div><button aria-label="Notifications" class="relative p-2 rounded-full text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full"></span></button><div class="flex items-center gap-3 pl-3 border-l border-outline-variant"><div class="flex flex-col text-right hidden sm:flex"><span class="font-body-md text-body-md text-on-surface font-bold leading-tight">Rajesh Sharma</span><span class="font-dual-sub text-dual-sub text-on-surface-variant leading-tight">Facility Manager</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-16 bg-surface px-8"><div class="flex flex-col w-full pb-16">
-<!-- Top Stat Metrics Section -->
-<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 mb-6">
-<!-- Stat 1 -->
-<div class="bg-surface-container-lowest rounded-xl p-5 shadow-sm flex flex-col justify-between">
-<div class="flex items-center justify-between mb-3">
-<span class="font-dual-sub text-dual-sub text-on-surface-variant uppercase tracking-wider">Lots Pending Review</span>
-<span class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
-<span class="material-symbols-outlined text-[20px]">pending_actions</span>
-</span>
-</div>
-<div class="flex items-baseline gap-2">
-<span class="font-headline-lg text-headline-lg text-on-surface">8 Lots</span>
-<span class="font-dual-sub text-dual-sub px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant">3 High Grade PCB</span>
-</div>
-<div class="mt-3 flex items-center gap-1.5 text-primary font-dual-sub text-dual-sub">
-<span class="material-symbols-outlined text-[16px]">priority_high</span>
-<span>2 arriving within 30 mins</span>
-</div>
-</div>
-<!-- Stat 2 -->
-<div class="bg-surface-container-lowest rounded-xl p-5 shadow-sm flex flex-col justify-between">
-<div class="flex items-center justify-between mb-3">
-<span class="font-dual-sub text-dual-sub text-on-surface-variant uppercase tracking-wider">Today's Intake Target</span>
-<span class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
-<span class="material-symbols-outlined text-[20px]">scale</span>
-</span>
-</div>
-<div class="flex items-baseline gap-2">
-<span class="font-headline-lg text-headline-lg text-on-surface">2.4 MT</span>
-<span class="font-body-md text-body-md text-on-surface-variant">/ 4.0 MT</span>
-</div>
-<div class="mt-3 w-full">
-<div class="flex justify-between items-center mb-1">
-<span class="font-dual-sub text-dual-sub text-on-surface-variant">Facility Capacity</span>
-<span class="font-dual-sub text-dual-sub text-primary font-bold">60%</span>
-</div>
-<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
-<div class="bg-primary h-full rounded-full" style="width: 60%"></div>
-</div>
-</div>
-</div>
-<!-- Stat 3 -->
-<div class="bg-surface-container-lowest rounded-xl p-5 shadow-sm flex flex-col justify-between">
-<div class="flex items-center justify-between mb-3">
-<span class="font-dual-sub text-dual-sub text-on-surface-variant uppercase tracking-wider">CPCB EPR Credits</span>
-<span class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
-<span class="material-symbols-outlined text-[20px]">verified</span>
-</span>
-</div>
-<div class="flex items-baseline gap-2">
-<span class="font-headline-lg text-headline-lg text-on-surface">14.8 MT</span>
-<span class="font-dual-sub text-dual-sub px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed">Certified Compliant</span>
-</div>
-<div class="mt-3 flex items-center gap-1.5 text-on-surface-variant font-dual-sub text-dual-sub">
-<span class="material-symbols-outlined text-[16px] text-primary">auto_read_play</span>
-<span>Auto-synced to CPCB Portal</span>
-</div>
-</div>
-<!-- Stat 4 -->
-<div class="bg-surface-container-lowest rounded-xl p-5 shadow-sm flex flex-col justify-between">
-<div class="flex items-center justify-between mb-3">
-<span class="font-dual-sub text-dual-sub text-on-surface-variant uppercase tracking-wider">Total Disbursed Today</span>
-<span class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary">
-<span class="material-symbols-outlined text-[20px]">payments</span>
-</span>
-</div>
-<div class="flex items-baseline gap-2">
-<span class="font-headline-lg text-headline-lg text-primary">₹1,84,500</span>
-</div>
-<div class="mt-3 flex items-center justify-between text-on-surface-variant font-dual-sub text-dual-sub">
-<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-primary"></span> 92% Instant UPI</span>
-<span>8% Gate Cash</span>
-</div>
-</div>
-</div>
-<!-- Search and Action Toolbar -->
-<div class="bg-surface-container-lowest rounded-xl p-4 shadow-sm mb-6 flex flex-col lg:flex-row items-center justify-between gap-4">
-<div class="flex flex-wrap items-center gap-3 w-full lg:w-auto">
-<!-- Search -->
-<div class="relative flex-1 sm:w-80">
-<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
-<input class="w-full bg-surface-container-low rounded-lg pl-10 pr-4 py-2.5 text-body-md font-body-md text-on-surface placeholder:text-on-surface-variant focus:outline-none focus:bg-surface-container-high transition-colors" placeholder="Search Lot ID, Collector, or Material..." type="text" value="#LOT-9821"/>
-</div>
-<!-- Filter: Material -->
-<div class="relative">
-<select class="bg-surface-container-low rounded-lg pl-3 pr-8 py-2.5 text-body-md font-body-md text-on-surface focus:outline-none cursor-pointer appearance-none">
-<option>All Materials</option>
-<option selected="">PCB Boards (Grade A/B)</option>
-<option>Li-Ion &amp; Lead Acid Batteries</option>
-<option>Stripped Copper Cables</option>
-<option>Broken LCD Displays</option>
-</select>
-<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[18px]">expand_more</span>
-</div>
-<!-- Filter: Distance -->
-<div class="relative">
-<select class="bg-surface-container-low rounded-lg pl-3 pr-8 py-2.5 text-body-md font-body-md text-on-surface focus:outline-none cursor-pointer appearance-none">
-<option>Proximity: All</option>
-<option selected="">&lt; 5 km (Immediate)</option>
-<option>&lt; 15 km (Hub Transit)</option>
-<option>&gt; 15 km (Inter-city)</option>
-</select>
-<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[18px]">expand_more</span>
-</div>
-<!-- Filter: Status -->
-<div class="relative">
-<select class="bg-surface-container-low rounded-lg pl-3 pr-8 py-2.5 text-body-md font-body-md text-on-surface focus:outline-none cursor-pointer appearance-none">
-<option selected="">Status: Pending Review (8)</option>
-<option>Status: Accepted</option>
-<option>Status: Weighed &amp; Staged</option>
-</select>
-<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[18px]">expand_more</span>
-</div>
-</div>
-<!-- Quick Scan Action -->
-<div class="flex items-center gap-3 w-full lg:w-auto justify-end">
-<button class="bg-primary text-on-primary font-label-action text-label-action px-5 py-2.5 rounded-lg flex items-center justify-center gap-2 shadow-sm hover:opacity-95 transition-all active:scale-[0.98]" type="button">
-<span class="material-symbols-outlined text-[20px]">qr_code_scanner</span>
-<span>Scan Collector QR / Intake Gate</span>
-</button>
-</div>
-</div>
-<!-- Main Incoming Lot Requests Section -->
-<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden mb-8">
-<div class="p-5 bg-surface-container flex items-center justify-between">
-<div class="flex items-center gap-3">
-<span class="font-headline-sm text-headline-sm text-on-surface">Incoming Lot Requests Queue</span>
-<span class="px-2.5 py-0.5 rounded-full bg-primary text-on-primary font-label-badge text-label-badge">8 Active Lots</span>
-</div>
-<div class="flex items-center gap-2">
-<span class="font-dual-sub text-dual-sub text-on-surface-variant">Gate Scale Auto-detection: Active</span>
-<span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
-</div>
-</div>
-<!-- Lot Table Content -->
-<div class="divide-y divide-outline-variant/30 overflow-x-auto">
-<!-- Item Row 1: Focus Lot (Active modal subject) -->
-<div class="p-4 flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-surface-container-low/60 hover:bg-surface-container-low transition-colors">
-<div class="flex items-center gap-4 min-w-[340px]">
-<div class="w-20 h-20 rounded-lg overflow-hidden bg-surface-container-high flex-shrink-0 relative shadow-sm">
-<img alt="Circuit board scrap" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1UeI_fygPq_H1ne-fEKICr-BsG7E9cWoU5nOSGiSsgZx6F9p7KSg3uUdMeeOn0HVMDyXkKVfIDa3YjS_kM3NKF3zeiRjLeNtcd1c_uAnWbd6XaQuSz6gBjav7EhrxrD0mBy8mXIvBa4fR8T0V5oohHLwRNVP195iyIbiKgm_mxKyXmSi9JnjeNgdcTR8xnZdV6ImSuPEzMKHXrc1k_kNoTVJMK9olF-6udY2W7XfVX6k5_ocD0Hdnwlxc0"/>
-<span class="absolute bottom-1 right-1 bg-surface-container-lowest/90 px-1.5 py-0.5 rounded text-[10px] font-bold text-primary">QA Ready</span>
-</div>
-<div class="flex flex-col min-w-0">
-<div class="flex items-center gap-2">
-<span class="font-body-xl text-body-xl text-on-surface font-bold">#LOT-9821</span>
-<span class="px-2 py-0.5 rounded-md bg-primary-fixed text-on-primary-fixed font-label-badge text-label-badge text-xs">Telecom Grade A</span>
-</div>
-<span class="font-body-md text-body-md text-on-surface font-semibold truncate mt-0.5">High-Yield Motherboards &amp; Sever PCBs</span>
-<div class="flex items-center gap-2 mt-1 text-on-surface-variant font-dual-sub text-dual-sub">
-<span class="material-symbols-outlined text-[16px] text-primary">memory</span>
-<span>Gold &amp; Copper Rich</span>
-<span>•</span>
-<span class="text-primary font-bold">CPCB Cat: ITW1</span>
-</div>
-</div>
-</div>
-<div class="flex items-center gap-8 justify-between lg:justify-start">
-<div class="flex flex-col">
-<span class="font-dual-sub text-dual-sub text-on-surface-variant uppercase">Approx Weight</span>
-<span class="font-headline-sm text-headline-sm text-on-surface font-extrabold">12.5 kg</span>
-<span class="text-[11px] text-on-surface-variant">Gate Target ~12.8 kg</span>
-</div>
-<div class="flex flex-col min-w-[180px]">
-<span class="font-dual-sub text-dual-sub text-on-surface-variant uppercase">Collector Details</span>
-<div class="flex items-center gap-1.5 mt-0.5">
-<span class="font-body-md text-body-md text-on-surface font-bold">Ramesh Kumar</span>
-<span class="material-symbols-outlined text-primary text-[16px]">verified</span>
-</div>
-<span class="font-dual-sub text-dual-sub text-on-surface-variant">2.4 km away • Transit via Tempo</span>
-</div>
-<div class="flex flex-col">
-<span class="font-dual-sub text-dual-sub text-on-surface-variant uppercase">Quoted Estimate</span>
-<span class="font-headline-sm text-headline-sm text-primary font-extrabold">₹6,800 - ₹7,400</span>
-<span class="text-[11px] text-on-surface-variant">₹560/kg base index</span>
-</div>
-</div>
-<div class="flex items-center gap-2 self-end lg:self-center">
-<button class="px-3.5 py-2 rounded-lg bg-surface-container text-on-surface-variant hover:bg-error-container hover:text-on-error-container transition-colors font-body-md text-body-md" type="button">
-            Reject
+  <!-- Google Fonts & Material Symbols -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+
+  <!-- Leaflet.js CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "background": "#faf8ff",
+            "primary": "#00652c",
+            "primary-container": "#15803d",
+            "on-primary": "#ffffff",
+            "secondary": "#904d00",
+            "secondary-container": "#fe932c",
+            "on-secondary": "#ffffff",
+            "surface": "#faf8ff",
+            "surface-container": "#eaedff",
+            "surface-container-low": "#f2f3ff",
+            "surface-container-high": "#e2e7ff",
+            "surface-container-lowest": "#ffffff",
+            "on-surface": "#131b2e",
+            "on-surface-variant": "#3f493f",
+            "outline": "#6f7a6e",
+            "outline-variant": "#becabc",
+            "error": "#ba1a1a"
+          },
+          fontFamily: {
+            sans: ["Plus Jakarta Sans", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .leaflet-popup-content-wrapper {
+      border-radius: 14px;
+      box-shadow: 0 4px 20px -2px rgba(0,0,0,0.18);
+      padding: 4px;
+    }
+    .leaflet-popup-content { margin: 8px 12px; }
+    .custom-recycler-pin {
+      background-color: #00652c;
+      color: white;
+      border: 2px solid white;
+      border-radius: 50%;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .user-gps-pin {
+      background-color: #2563eb;
+      color: white;
+      border: 3px solid white;
+      border-radius: 50%;
+      box-shadow: 0 0 0 6px rgba(37,99,235,0.3), 0 3px 10px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: pulse-gps 2s infinite;
+    }
+    @keyframes pulse-gps {
+      0% { box-shadow: 0 0 0 0 rgba(37,99,235,0.5), 0 3px 10px rgba(0,0,0,0.3); }
+      70% { box-shadow: 0 0 0 12px rgba(37,99,235,0), 0 3px 10px rgba(0,0,0,0.3); }
+      100% { box-shadow: 0 0 0 0 rgba(37,99,235,0), 0 3px 10px rgba(0,0,0,0.3); }
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col">
+
+  <!-- Top Navigation Header -->
+  <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-surface-container-high shadow-sm px-4 lg:px-8 py-3.5">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="/" title="Back to Dashboard">
+          <img alt="HandOver1 Brand Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1W8Ma8pLvOhzOnudPe5sV1FI6HhsXFZUcCPTaFSuXhvSD7W7AcZekKd4_e2fBo-PbP3iWd0dKfR0vsCqafhVbLs-GZDcoTS4Kmdyn218ym7fkIZyO4x9U6quR5U_gZ6tPa6c1eMr-3bPifezdOJKX60GCM2-meverEErDtojKjdTAss1fAzI52lF_79OX5MTADxEAgKynKkBRicPm1iuSzW79iQTGy_8f-wyJCIKmJvhpQiygvRnL56NF4"/>
+        </a>
+        <div>
+          <h1 class="text-lg font-extrabold text-on-surface leading-tight">HandOver1</h1>
+          <p class="text-xs font-bold text-secondary">Recycler Portal · Facility Operations & Network Map</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="hidden md:flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container text-xs font-semibold text-primary">
+          <span class="material-symbols-outlined text-16px">verified_user</span>
+          <span>CPCB ID: MH-2024-EW88 (Verified Recycler)</span>
+        </div>
+
+        <a href="/collector" class="text-xs font-semibold text-on-surface-variant hover:text-primary px-3 py-1.5 rounded-lg border border-outline-variant hover:bg-surface-container transition-colors">
+          Switch to Collector View →
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Operations Dashboard -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 lg:px-8 py-6 space-y-6">
+
+    <!-- KPI Metric Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="bg-surface-container-lowest rounded-2xl p-5 border border-surface-container shadow-sm flex flex-col justify-between">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Lots Pending Review</span>
+          <span class="w-8 h-8 rounded-xl bg-surface-container flex items-center justify-center text-primary">
+            <span class="material-symbols-outlined text-18px">pending_actions</span>
+          </span>
+        </div>
+        <div class="text-2xl font-extrabold text-on-surface">8 Lots</div>
+        <div class="mt-2 text-xs font-semibold text-primary flex items-center gap-1">
+          <span class="material-symbols-outlined text-14px">priority_high</span>
+          <span>3 High Grade PCB lots awaiting verification</span>
+        </div>
+      </div>
+
+      <div class="bg-surface-container-lowest rounded-2xl p-5 border border-surface-container shadow-sm flex flex-col justify-between">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Intake Capacity</span>
+          <span class="w-8 h-8 rounded-xl bg-surface-container flex items-center justify-center text-primary">
+            <span class="material-symbols-outlined text-18px">scale</span>
+          </span>
+        </div>
+        <div class="text-2xl font-extrabold text-on-surface">2.4 MT <span class="text-xs font-semibold text-on-surface-variant">/ 4.0 MT</span></div>
+        <div class="w-full bg-surface-container-high h-2 rounded-full mt-2 overflow-hidden">
+          <div class="bg-primary h-full rounded-full" style="width: 60%"></div>
+        </div>
+      </div>
+
+      <div class="bg-surface-container-lowest rounded-2xl p-5 border border-surface-container shadow-sm flex flex-col justify-between">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-bold uppercase tracking-wider text-on-surface-variant">CPCB EPR Credits</span>
+          <span class="w-8 h-8 rounded-xl bg-surface-container flex items-center justify-center text-primary">
+            <span class="material-symbols-outlined text-18px">verified</span>
+          </span>
+        </div>
+        <div class="text-2xl font-extrabold text-primary">14.8 MT</div>
+        <div class="mt-2 text-xs font-semibold text-on-surface-variant flex items-center gap-1">
+          <span class="material-symbols-outlined text-14px text-primary">cloud_done</span>
+          <span>Form-6 Manifests synced to CPCB Portal</span>
+        </div>
+      </div>
+
+      <div class="bg-surface-container-lowest rounded-2xl p-5 border border-surface-container shadow-sm flex flex-col justify-between">
+        <div class="flex items-center justify-between mb-2">
+          <span class="text-xs font-bold uppercase tracking-wider text-on-surface-variant">Settlements Disbursed</span>
+          <span class="w-8 h-8 rounded-xl bg-surface-container flex items-center justify-center text-primary">
+            <span class="material-symbols-outlined text-18px">payments</span>
+          </span>
+        </div>
+        <div class="text-2xl font-extrabold text-on-surface">₹1,84,500</div>
+        <div class="mt-2 text-xs font-semibold text-primary flex items-center gap-1">
+          <span class="w-2 h-2 rounded-full bg-primary"></span>
+          <span>92% Instant UPI · 8% Gate Cash</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Leaflet.js Recycler Network Map Section -->
+    <div class="bg-surface-container-lowest rounded-2xl p-6 border border-surface-container shadow-sm space-y-4">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary text-24px">map</span>
+            <h2 class="text-lg font-extrabold text-on-surface">Recycler Network & Facilities Map</h2>
+          </div>
+          <p class="text-xs text-on-surface-variant mt-0.5">
+            Initializes with browser GPS location to find certified processing facilities and drop-off hubs.
+          </p>
+        </div>
+
+        <!-- Filter Buttons by Material -->
+        <div class="flex flex-wrap items-center gap-2">
+          <button type="button" class="category-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-primary text-white transition-all shadow-sm" data-category="">
+            All Streams
           </button>
-<button class="px-5 py-2 rounded-lg bg-primary text-on-primary hover:bg-primary-container font-label-action text-label-action flex items-center gap-2 shadow-sm transition-transform active:scale-95" type="button">
-<span class="material-symbols-outlined text-[18px]">verified_user</span>
-<span>Verify Handover</span>
-</button>
-</div>
-</div>
-<!-- Item Row 2: Battery Lot -->
-<div class="p-4 flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-surface-container-lowest hover:bg-surface-container-low transition-colors">
-<div class="flex items-center gap-4 min-w-[340px]">
-<div class="w-20 h-20 rounded-lg overflow-hidden bg-surface-container-high flex-shrink-0 relative shadow-sm">
-<img alt="Battery scrap lot" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1WrfRv4VwRSoL4WJAubn3ptSzlAJ56GauM0Fcgu1aKRReWWxUOVOS6XapWfJ1uhylKIRUKW4FD-wKcv_Qs85qfpOQuORPmdIeaADJh17kFR0tRJHZgdcSvtLiEV-bWjqw8YrRB978waJu0nraT1EO0f0MOjkDxoWtiXOBM5ezq6qc2tuiERLPs-lq4NxjRed8VaPKYn3bZ3qbs7u5lPHh3_MZY61qPZ9n3jXymXmjEpuxH2utwICKT_QQ"/>
-<span class="absolute bottom-1 right-1 bg-surface-container-lowest/90 px-1.5 py-0.5 rounded text-[10px] font-bold text-secondary">Hazmat Req</span>
-</div>
-<div class="flex flex-col min-w-0">
-<div class="flex items-center gap-2">
-<span class="font-body-xl text-body-xl text-on-surface font-bold">#LOT-9824</span>
-<span class="px-2 py-0.5 rounded-md bg-secondary-fixed text-on-secondary-fixed-variant font-label-badge text-label-badge text-xs">Battery Core</span>
-</div>
-<span class="font-body-md text-body-md text-on-surface font-semibold truncate mt-0.5">Lithium-Ion &amp; Sealed Lead-Acid (SLA)</span>
-<div class="flex items-center gap-2 mt-1 text-on-surface-variant font-dual-sub text-dual-sub">
-<span class="material-symbols-outlined text-[16px] text-secondary">battery_charging_full</span>
-<span>Intact Terminals Verified</span>
-<span>•</span>
-<span class="text-on-surface font-bold">CPCB Cat: BTR4</span>
-</div>
-</div>
-</div>
-<div class="flex items-center gap-8 justify-between lg:justify-start">
-<div class="flex flex-col">
-<span class="font-dual-sub text-dual-sub text-on-surface-variant uppercase">Approx Weight</span>
-<span class="font-headline-sm text-headline-sm text-on-surface font-extrabold">48.0 kg</span>
-<span class="text-[11px] text-on-surface-variant">Gross Tare Est: 52 kg</span>
-</div>
-<div class="flex flex-col min-w-[180px]">
-<span class="font-dual-sub text-dual-sub text-on-surface-variant uppercase">Collector Details</span>
-<div class="flex items-center gap-1.5 mt-0.5">
-<span class="font-body-md text-body-md text-on-surface font-bold">Sunil Aggarwal</span>
-<span class="material-symbols-outlined text-primary text-[16px]">verified</span>
-</div>
-<span class="font-dual-sub text-dual-sub text-on-surface-variant">4.1 km away • E-Rickshaw Loader</span>
-</div>
-<div class="flex flex-col">
-<span class="font-dual-sub text-dual-sub text-on-surface-variant uppercase">Quoted Estimate</span>
-<span class="font-headline-sm text-headline-sm text-primary font-extrabold">₹8,640</span>
-<span class="text-[11px] text-on-surface-variant">₹180/kg base index</span>
-</div>
-</div>
-<div class="flex items-center gap-2 self-end lg:self-center">
-<button class="px-3.5 py-2 rounded-lg bg-surface-container text-on-surface-variant hover:bg-error-container hover:text-on-error-container transition-colors font-body-md text-body-md" type="button">
-            Reject
+          <button type="button" class="category-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-surface-container text-on-surface hover:bg-surface-container-high transition-all" data-category="PCB">
+            PCB / Motherboards
           </button>
-<button class="px-5 py-2 rounded-lg bg-primary text-on-primary hover:bg-primary-container font-label-action text-label-action flex items-center gap-2 shadow-sm transition-transform active:scale-95" type="button">
-<span class="material-symbols-outlined text-[18px]">verified_user</span>
-<span>Verify Handover</span>
-</button>
-</div>
-</div>
-<!-- Item Row 3: Copper Cable Lot -->
-<div class="p-4 flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-surface-container-lowest hover:bg-surface-container-low transition-colors">
-<div class="flex items-center gap-4 min-w-[340px]">
-<div class="w-20 h-20 rounded-lg overflow-hidden bg-surface-container-high flex-shrink-0 relative shadow-sm">
-<img alt="Copper wire scrap coils" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1VyOqTXAoX7hUmUQFIdHPa-je7Kil_kCQFZEk_xcElQhhFjApX9AvMrLiUtOMMmOUa_L81MC2rmIrkLx_x6DryPYXZdKyKo22VTzEin6GmRgOFV1_cOi217ISqI1P4YlD4RDmX-FCXAsMYNLEmBHdqDZWe7xRvjYIBBocdBcQ_kupdZjH9oA4fgLsLR6OCZGFqOAOjUpw9rGm6cOIM8moJcBMjn3VjlVFVU_rmJlDMTH9G2dkLke_b_9c8"/>
-<span class="absolute bottom-1 right-1 bg-surface-container-lowest/90 px-1.5 py-0.5 rounded text-[10px] font-bold text-primary">High Purity</span>
-</div>
-<div class="flex flex-col min-w-0">
-<div class="flex items-center gap-2">
-<span class="font-body-xl text-body-xl text-on-surface font-bold">#LOT-9828</span>
-<span class="px-2 py-0.5 rounded-md bg-secondary-fixed text-on-secondary-fixed-variant font-label-badge text-label-badge text-xs">Millberry Pure</span>
-</div>
-<span class="font-body-md text-body-md text-on-surface font-semibold truncate mt-0.5">Stripped Heavy Copper Harness Cables</span>
-<div class="flex items-center gap-2 mt-1 text-on-surface-variant font-dual-sub text-dual-sub">
-<span class="material-symbols-outlined text-[16px] text-primary">cable</span>
-<span>Bright Bare Wire 99.2%</span>
-<span>•</span>
-<span class="text-on-surface font-bold">CPCB Cat: NFM1</span>
-</div>
-</div>
-</div>
-<div class="flex items-center gap-8 justify-between lg:justify-start">
-<div class="flex flex-col">
-<span class="font-dual-sub text-dual-sub text-on-surface-variant uppercase">Approx Weight</span>
-<span class="font-headline-sm text-headline-sm text-on-surface font-extrabold">35.2 kg</span>
-<span class="text-[11px] text-on-surface-variant">Calibrated Hook Scale</span>
-</div>
-<div class="flex flex-col min-w-[180px]">
-<span class="font-dual-sub text-dual-sub text-on-surface-variant uppercase">Collector Details</span>
-<div class="flex items-center gap-1.5 mt-0.5">
-<span class="font-body-md text-body-md text-on-surface font-bold">Mohd. Irfan</span>
-<span class="material-symbols-outlined text-primary text-[16px]">verified</span>
-</div>
-<span class="font-dual-sub text-dual-sub text-on-surface-variant">1.8 km away • Direct Drop-off</span>
-</div>
-<div class="flex flex-col">
-<span class="font-dual-sub text-dual-sub text-on-surface-variant uppercase">Quoted Estimate</span>
-<span class="font-headline-sm text-headline-sm text-primary font-extrabold">₹24,990</span>
-<span class="text-[11px] text-on-surface-variant">₹710/kg base index</span>
-</div>
-</div>
-<div class="flex items-center gap-2 self-end lg:self-center">
-<button class="px-3.5 py-2 rounded-lg bg-surface-container text-on-surface-variant hover:bg-error-container hover:text-on-error-container transition-colors font-body-md text-body-md" type="button">
-            Reject
+          <button type="button" class="category-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-surface-container text-on-surface hover:bg-surface-container-high transition-all" data-category="Copper">
+            Copper
           </button>
-<button class="px-5 py-2 rounded-lg bg-primary text-on-primary hover:bg-primary-container font-label-action text-label-action flex items-center gap-2 shadow-sm transition-transform active:scale-95" type="button">
-<span class="material-symbols-outlined text-[18px]">verified_user</span>
-<span>Verify Handover</span>
-</button>
-</div>
-</div>
-<!-- Item Row 4: LCD Monitors Lot -->
-<div class="p-4 flex flex-col lg:flex-row lg:items-center justify-between gap-4 bg-surface-container-lowest hover:bg-surface-container-low transition-colors">
-<div class="flex items-center gap-4 min-w-[340px]">
-<div class="w-20 h-20 rounded-lg overflow-hidden bg-surface-container-high flex-shrink-0 relative shadow-sm">
-<img alt="Broken LCD displays scrap" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1XCMGiydkeAuYG2teEmOMcrDRVbKGIum2fgyW-vwfZf1pyoyEHPrlm8dMawR9D2rEJTyFUo2dLDWh0TpE5Ro2QiXHCvPDTDQdm8rU_LRqipc9EzsHLqe9h2m0dEscJ6KrjtpzW6viIei5SYwBmXPbDxuZ1iSFjFXcjWEQUw-dxoo1B9Fqt8qRBRK2Ln77s585qp1JaGuIUs7d53--6Rd1PTJjyNlHqrY0zz0v8KnVvuvUugRbRfJ4_dQK0"/>
-<span class="absolute bottom-1 right-1 bg-surface-container-lowest/90 px-1.5 py-0.5 rounded text-[10px] font-bold text-on-surface-variant">Bulk</span>
-</div>
-<div class="flex flex-col min-w-0">
-<div class="flex items-center gap-2">
-<span class="font-body-xl text-body-xl text-on-surface font-bold">#LOT-9832</span>
-<span class="px-2 py-0.5 rounded-md bg-surface-container-high text-on-surface font-label-badge text-label-badge text-xs">Display Units</span>
-</div>
-<span class="font-body-md text-body-md text-on-surface font-semibold truncate mt-0.5">Damaged Laptop &amp; Desktop LCD Displays</span>
-<div class="flex items-center gap-2 mt-1 text-on-surface-variant font-dual-sub text-dual-sub">
-<span class="material-symbols-outlined text-[16px] text-on-surface-variant">tv</span>
-<span>Mercury Backlight Intact Check</span>
-<span>•</span>
-<span class="text-on-surface font-bold">CPCB Cat: ITW2</span>
-</div>
-</div>
-</div>
-<div class="flex items-center gap-8 justify-between lg:justify-start">
-<div class="flex flex-col">
-<span class="font-dual-sub text-dual-sub text-on-surface-variant uppercase">Approx Weight</span>
-<span class="font-headline-sm text-headline-sm text-on-surface font-extrabold">82.0 kg</span>
-<span class="text-[11px] text-on-surface-variant">Est 34 Units</span>
-</div>
-<div class="flex flex-col min-w-[180px]">
-<span class="font-dual-sub text-dual-sub text-on-surface-variant uppercase">Collector Details</span>
-<div class="flex items-center gap-1.5 mt-0.5">
-<span class="font-body-md text-body-md text-on-surface font-bold">Anand Scrap Traders</span>
-<span class="material-symbols-outlined text-primary text-[16px]">verified</span>
-</div>
-<span class="font-dual-sub text-dual-sub text-on-surface-variant">6.7 km away • Pickup Requested</span>
-</div>
-<div class="flex flex-col">
-<span class="font-dual-sub text-dual-sub text-on-surface-variant uppercase">Quoted Estimate</span>
-<span class="font-headline-sm text-headline-sm text-primary font-extrabold">₹11,480</span>
-<span class="text-[11px] text-on-surface-variant">₹140/kg base index</span>
-</div>
-</div>
-<div class="flex items-center gap-2 self-end lg:self-center">
-<button class="px-3.5 py-2 rounded-lg bg-surface-container text-on-surface-variant hover:bg-error-container hover:text-on-error-container transition-colors font-body-md text-body-md" type="button">
-            Reject
+          <button type="button" class="category-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-surface-container text-on-surface hover:bg-surface-container-high transition-all" data-category="Batteries">
+            Batteries
           </button>
-<button class="px-5 py-2 rounded-lg bg-primary text-on-primary hover:bg-primary-container font-label-action text-label-action flex items-center gap-2 shadow-sm transition-transform active:scale-95" type="button">
-<span class="material-symbols-outlined text-[18px]">verified_user</span>
-<span>Verify Handover</span>
-</button>
-</div>
-</div>
-</div>
-</div>
-<!-- Warehouse Live Intake Overview Banner -->
-<div class="rounded-xl overflow-hidden shadow-sm bg-surface-container-lowest p-5 flex flex-col md:flex-row items-center gap-6">
-<div class="w-full md:w-56 h-36 rounded-lg overflow-hidden flex-shrink-0 bg-surface-container">
-<img alt="Facility e-waste recycling intake area" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCM5A4qIwJStJLnmwCjy9Q-SlfPHci1byXhU6Mr-f4B3xuC4Nb8F83JGt4Zltez-ZqHKR7GgZNA-AKeKl45tj3Bt0YGghSeiO_i4gxVYl1EqRLEyUaZE0dGBYh4AukdpDIMG_EP4I0c3eqf7U0H3i_ZJtShz91pfpxE08zv3S8uH9qikkUO_vgJ_HGiTF35drmHoG7PBn3fL2gis2WdTtluUNK49LqxgG0FZUZJKhXv6RUPp3uTvGdi"/>
-</div>
-<div class="flex flex-col flex-1">
-<div class="flex items-center gap-2 mb-1">
-<span class="material-symbols-outlined text-primary text-[20px]">warehouse</span>
-<span class="font-headline-sm text-headline-sm text-on-surface">Intake Staging Bay #2 - Live Operational Status</span>
-</div>
-<p class="font-body-md text-body-md text-on-surface-variant mb-4">
-        All incoming material lots must undergo gate scale tare verification, radiation sweep, and CPCB Form-6 manifest tagging before being transferred to shredder bays or secondary smelting lots.
-      </p>
-<div class="flex flex-wrap items-center gap-4 text-on-surface font-dual-sub text-dual-sub">
-<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container">
-<span class="material-symbols-outlined text-[16px] text-primary">scale</span>
-<span>Weighbridge Calibrated: Today 08:00 AM</span>
-</div>
-<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container">
-<span class="material-symbols-outlined text-[16px] text-primary">security</span>
-<span>CCTV Gate Stream Active: Cam #04 &amp; #07</span>
-</div>
-<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container">
-<span class="material-symbols-outlined text-[16px] text-primary">cloud_done</span>
-<span>EPR Ledger Sync Latency: 1.2s</span>
-</div>
-</div>
-</div>
-</div>
-<!-- ========================================================= -->
-<!-- ACTIVE HANDOVER CONFIRMATION MODAL (IN FOCUS OVER SCREEN)  -->
-<!-- ========================================================= -->
-<div class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-on-surface/60 backdrop-blur-sm overflow-y-auto">
-<div class="relative w-full max-w-2xl bg-surface-container-lowest rounded-2xl shadow-2xl overflow-hidden my-auto flex flex-col">
-<!-- Modal Header -->
-<div class="px-6 py-5 bg-surface-container flex items-center justify-between">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary">
-<span class="material-symbols-outlined text-[24px]">fact_check</span>
-</div>
-<div class="flex flex-col">
-<div class="flex items-center gap-2">
-<span class="font-headline-sm text-headline-sm text-on-surface leading-tight">HandOver1 - Gate Intake &amp; Verification</span>
-</div>
-<div class="flex items-center gap-2 mt-0.5">
-<span class="font-label-badge text-label-badge text-[12px] px-2 py-0.5 rounded bg-primary-fixed text-on-primary-fixed font-bold tracking-wider uppercase">CPCB FORM-6 GATE INTAKE</span>
-<span class="text-on-surface-variant font-dual-sub text-dual-sub">•</span>
-<span class="font-dual-sub text-dual-sub text-on-surface font-extrabold">Lot #LOT-9821</span>
-</div>
-</div>
-</div>
-<button aria-label="Close modal" class="p-2 rounded-full text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button">
-<span class="material-symbols-outlined text-[22px]">close</span>
-</button>
-</div>
-<!-- Modal Body Form -->
-<div class="p-6 space-y-6 max-h-[calc(85vh-130px)] overflow-y-auto">
-<!-- Selected Lot Quick Card -->
-<div class="bg-surface-container-low rounded-xl p-4 flex gap-4 items-center">
-<div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 bg-surface-container-high shadow-sm">
-<img alt="Circuit board scrap" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1UeI_fygPq_H1ne-fEKICr-BsG7E9cWoU5nOSGiSsgZx6F9p7KSg3uUdMeeOn0HVMDyXkKVfIDa3YjS_kM3NKF3zeiRjLeNtcd1c_uAnWbd6XaQuSz6gBjav7EhrxrD0mBy8mXIvBa4fR8T0V5oohHLwRNVP195iyIbiKgm_mxKyXmSi9JnjeNgdcTR8xnZdV6ImSuPEzMKHXrc1k_kNoTVJMK9olF-6udY2W7XfVX6k5_ocD0Hdnwlxc0"/>
-</div>
-<div class="flex-1 min-w-0">
-<div class="flex items-center justify-between gap-2">
-<span class="font-body-xl text-body-xl text-on-surface font-bold truncate">PCB Grade-A (Telecom &amp; Server Circuit Boards)</span>
-</div>
-<div class="text-primary font-dual-sub text-dual-sub font-bold mt-0.5">Yield Grade: High Gold &amp; Copper Yield</div>
-<div class="text-on-surface-variant font-body-md text-body-md mt-1 truncate">
-              Collector: <strong class="text-on-surface">Ramesh Kumar</strong> (+91 98201 44102) • <span class="text-primary">Verified Aadhaar &amp; CPCB Collector ID</span>
-</div>
-<div class="flex items-center gap-2 mt-2">
-<span class="px-2 py-0.5 rounded bg-surface-container-lowest text-primary font-dual-sub text-dual-sub font-semibold">✓ Visual Inspection Passed</span>
-<span class="px-2 py-0.5 rounded bg-surface-container-lowest text-primary font-dual-sub text-dual-sub font-semibold">✓ Zero Hazardous Leaks</span>
-</div>
-</div>
-</div>
-<!-- Field 1: Confirmed Actual Weight -->
-<div class="flex flex-col gap-2">
-<div class="flex items-center justify-between">
-<label class="font-body-xl text-body-xl text-on-surface font-bold flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-[20px]">scale</span>
-<span>1. Confirmed Actual Weight (kg)</span>
-</label>
-<span class="font-dual-sub text-dual-sub text-primary flex items-center gap-1 font-bold">
-<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-              Live BLE Scale Connected
-            </span>
-</div>
-<div class="bg-surface-container-high rounded-xl p-4 flex items-center justify-between">
-<div class="flex items-baseline gap-2">
-<input class="w-36 bg-transparent font-display-currency text-display-currency text-on-surface font-extrabold focus:outline-none tracking-tight" type="text" value="12.80"/>
-<span class="font-headline-md text-headline-md text-on-surface-variant font-bold">kg</span>
-</div>
-<div class="flex items-center gap-2">
-<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest text-on-surface font-dual-sub text-dual-sub font-bold shadow-sm hover:bg-surface-container transition-colors" type="button">
-                Tare Scale
-              </button>
-<button class="px-3 py-1.5 rounded-lg bg-surface-container-lowest text-primary font-dual-sub text-dual-sub font-bold shadow-sm hover:bg-surface-container transition-colors flex items-center gap-1" type="button">
-<span class="material-symbols-outlined text-[16px]">refresh</span>
-                Re-Read
-              </button>
-</div>
-</div>
-<div class="flex items-center justify-between px-1 text-on-surface-variant font-dual-sub text-dual-sub">
-<span class="flex items-center gap-1">
-<span class="material-symbols-outlined text-[16px] text-primary">bluetooth_connected</span>
-<span>IoT Scale DS-500 #BT-8842</span>
-</span>
-<span class="text-primary font-bold">Difference vs Quoted: +0.30 kg (+2.4%)</span>
-</div>
-</div>
-<!-- Field 2: Final Agreed Price -->
-<div class="flex flex-col gap-2">
-<div class="flex items-center justify-between">
-<label class="font-body-xl text-body-xl text-on-surface font-bold flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-[20px]">currency_rupee</span>
-<span>2. Final Agreed Price (₹)</span>
-</label>
-<span class="font-dual-sub text-dual-sub text-on-surface-variant">CPCB Scrap Rate Index: ₹562.50/kg</span>
-</div>
-<div class="bg-surface-container-high rounded-xl p-4 flex items-center justify-between">
-<div class="flex items-center gap-1">
-<span class="font-display-currency text-display-currency text-primary font-extrabold">₹</span>
-<input class="w-48 bg-transparent font-display-currency text-display-currency text-primary font-extrabold focus:outline-none tracking-tight" type="text" value="7,200"/>
-</div>
-<div class="flex flex-col items-end">
-<span class="px-2.5 py-1 rounded-full bg-primary text-on-primary font-label-badge text-label-badge text-xs">Pre-approved by Collector</span>
-<span class="font-dual-sub text-dual-sub text-on-surface-variant mt-1">₹562.50 × 12.80 kg</span>
-</div>
-</div>
-<div class="flex items-center justify-between px-1 text-on-surface-variant font-dual-sub text-dual-sub">
-<span>Base: ₹7,000 + Clean Sorting Incentive: ₹200</span>
-<span class="text-primary font-semibold">TDS Deducted: ₹0.00 (Exempt under Sec 206C)</span>
-</div>
-</div>
-<!-- Field 3: Payment Status -->
-<div class="flex flex-col gap-2">
-<div class="flex items-center justify-between">
-<label class="font-body-xl text-body-xl text-on-surface font-bold flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-[20px]">account_balance_wallet</span>
-<span>3. Payment Status &amp; Settlement Channel</span>
-</label>
-<span class="font-dual-sub text-dual-sub text-primary font-bold">Instant Disbursal Enabled</span>
-</div>
-<!-- Radio selection tiles -->
-<div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-<!-- Option 1 -->
-<label class="flex flex-col p-3 rounded-xl bg-surface-container-low cursor-pointer hover:bg-surface-container-high transition-colors">
-<div class="flex items-center justify-between mb-1">
-<span class="font-body-md text-body-md text-on-surface font-bold">Pending Escrow</span>
-<input class="accent-primary w-4 h-4" name="payment_method" type="radio"/>
-</div>
-<span class="font-dual-sub text-dual-sub text-on-surface-variant">Hold payout pending chemical assay testing</span>
-</label>
-<!-- Option 2 -->
-<label class="flex flex-col p-3 rounded-xl bg-surface-container-low cursor-pointer hover:bg-surface-container-high transition-colors">
-<div class="flex items-center justify-between mb-1">
-<span class="font-body-md text-body-md text-on-surface font-bold">Cash at Gate</span>
-<input class="accent-primary w-4 h-4" name="payment_method" type="radio"/>
-</div>
-<span class="font-dual-sub text-dual-sub text-on-surface-variant">Disburse via facility physical cash counter</span>
-</label>
-<!-- Option 3: ACTIVE / SELECTED -->
-<label class="flex flex-col p-3 rounded-xl bg-primary-fixed text-on-primary-fixed shadow-sm cursor-pointer">
-<div class="flex items-center justify-between mb-1">
-<span class="font-body-md text-body-md font-extrabold flex items-center gap-1">
-<span class="material-symbols-outlined text-[18px]">check_circle</span>
-<span>UPI Completed</span>
-</span>
-<input checked="" class="accent-primary w-4 h-4" name="payment_method" type="radio"/>
-</div>
-<span class="font-dual-sub text-dual-sub opacity-90">Instant bank transfer settled to collector VPA</span>
-</label>
-</div>
-<!-- Active UPI Payment Details Banner -->
-<div class="p-3 bg-surface-container-high rounded-lg flex items-center justify-between text-on-surface font-dual-sub text-dual-sub">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-[18px]">verified</span>
-<span><strong>NPCI UPI Ref:</strong> #UPI-984210048123 (HDFC Bank)</span>
-</div>
-<span class="text-primary font-bold">UTR: 329048102391 • Confirmed</span>
-</div>
-<!-- Compliance Form-6 Notice -->
-<div class="flex items-start gap-2 text-on-surface-variant font-dual-sub text-dual-sub pt-1">
-<span class="material-symbols-outlined text-[16px] text-primary flex-shrink-0 mt-0.5">info</span>
-<span>Upon generating QR code, CPCB Form-6 Electronic Manifest will be digitally countersigned and recorded to the CPCB National E-Waste Portal with GPS Geo-tag.</span>
-</div>
-</div>
-</div>
-<!-- Modal Footer Action CTA -->
-<div class="px-6 py-4 bg-surface-container flex flex-col sm:flex-row items-center justify-between gap-3">
-<div class="flex items-center gap-2 w-full sm:w-auto">
-<button class="w-1/2 sm:w-auto px-4 py-2.5 rounded-lg bg-surface-container-high text-on-surface font-body-md text-body-md hover:bg-surface-variant transition-colors" type="button">
-            Cancel / Return to Queue
+          <button type="button" class="category-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-surface-container text-on-surface hover:bg-surface-container-high transition-all" data-category="Displays">
+            Displays
           </button>
-<button class="w-1/2 sm:w-auto px-4 py-2.5 rounded-lg bg-surface-container-lowest text-on-surface font-body-md text-body-md hover:bg-surface-container-high transition-colors shadow-sm" type="button">
-            Save as Draft
+          <button type="button" id="recenterGpsBtn" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-blue-50 text-blue-700 hover:bg-blue-100 border border-blue-200 flex items-center gap-1 transition-all" title="Recenter to your current GPS position">
+            <span class="material-symbols-outlined text-14px">my_location</span>
+            GPS Location
           </button>
-</div>
-<!-- Primary CTA: Generate Handover QR Code -->
-<button class="w-full sm:w-auto px-6 py-3 rounded-lg bg-primary text-on-primary font-label-action text-label-action flex items-center justify-center gap-3 shadow-md hover:opacity-95 transition-all active:scale-[0.98]" type="button">
-<span class="material-symbols-outlined text-[24px]">qr_code_2</span>
-<span>Generate Handover QR Code</span>
-</button>
-</div>
-</div>
-</div>
-</div></main></div></body></html>
+        </div>
+      </div>
+
+      <!-- Map Container -->
+      <div class="relative w-full rounded-2xl overflow-hidden border border-outline-variant shadow-inner" style="min-height: 480px;">
+        <div id="map" class="w-full h-full min-h-[480px]"></div>
+
+        <!-- Live Map Status Indicator -->
+        <div class="absolute top-3 right-3 z-[1000] bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-xl shadow-md border border-surface-container text-xs flex items-center gap-2">
+          <span id="gpsIndicatorDot" class="w-2 h-2 rounded-full bg-blue-600 animate-ping"></span>
+          <span id="gpsStatusMessage" class="font-semibold text-on-surface">Locating browser GPS...</span>
+        </div>
+
+        <!-- Overlay Legend -->
+        <div class="absolute bottom-3 left-3 z-[1000] bg-white/95 backdrop-blur-md px-3.5 py-2 rounded-xl shadow-md border border-surface-container text-xs flex items-center gap-3">
+          <div class="flex items-center gap-1.5">
+            <div class="w-3.5 h-3.5 rounded-full bg-blue-600 border border-white"></div>
+            <span class="font-semibold text-on-surface">Your GPS</span>
+          </div>
+          <span class="text-outline-variant">|</span>
+          <div class="flex items-center gap-1.5">
+            <div class="w-3.5 h-3.5 rounded-full bg-primary border border-white"></div>
+            <span class="font-semibold text-on-surface">Certified Recycler</span>
+          </div>
+          <span class="text-outline-variant">|</span>
+          <span id="facilitiesCountText" class="font-bold text-primary">0 facilities</span>
+        </div>
+      </div>
+
+      <!-- Facility Cards Grid under Map -->
+      <div class="pt-2">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-2.5">
+          Matched Recyclers in Network (<span id="matchedCount">0</span>)
+        </h3>
+        <div id="recyclerCardsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div class="p-3.5 rounded-xl bg-surface-container-low border border-surface-container text-xs text-on-surface-variant animate-pulse">
+            Loading facility details...
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Weight & QA Verification / Transaction Settlement Modal Section -->
+    <div class="bg-surface-container-lowest rounded-2xl p-6 border border-surface-container shadow-sm space-y-4">
+      <div class="flex items-center justify-between border-b border-surface-container pb-4">
+        <div>
+          <h2 class="text-lg font-extrabold text-on-surface">Facility Weighment QA & Settlement</h2>
+          <p class="text-xs text-on-surface-variant mt-0.5">Verify scale weight, finalize settlement price, and issue CPCB Form-6 digital QR code.</p>
+        </div>
+        <span class="text-xs font-bold bg-primary/10 text-primary px-3 py-1 rounded-full">Gate QA Active</span>
+      </div>
+
+      <form id="settlementForm" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-1.5">Lot ID / Reference</label>
+          <input type="text" id="settleLotId" placeholder="e.g. 7D2038FD" value="7D2038FD" required
+            class="w-full bg-surface-container-low rounded-xl px-3.5 py-2.5 text-xs font-bold text-on-surface border border-outline-variant focus:outline-none focus:border-primary"/>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-1.5">Verified Final Weight (KG)</label>
+          <input type="number" step="0.1" id="settleWeight" placeholder="e.g. 12.5" value="12.5" required
+            class="w-full bg-surface-container-low rounded-xl px-3.5 py-2.5 text-xs font-bold text-on-surface border border-outline-variant focus:outline-none focus:border-primary"/>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-1.5">Settlement Amount (₹)</label>
+          <input type="number" step="1" id="settlePrice" placeholder="e.g. 7250" value="7250" required
+            class="w-full bg-surface-container-low rounded-xl px-3.5 py-2.5 text-xs font-bold text-primary border border-outline-variant focus:outline-none focus:border-primary"/>
+        </div>
+
+        <div class="md:col-span-3 flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
+          <div class="flex items-center gap-3 text-xs font-semibold text-on-surface">
+            <span>Payment Method:</span>
+            <label class="flex items-center gap-1.5 cursor-pointer">
+              <input type="radio" name="payMethod" value="UPI" checked class="accent-primary"/>
+              <span>Instant UPI (Auto-Settled)</span>
+            </label>
+            <label class="flex items-center gap-1.5 cursor-pointer">
+              <input type="radio" name="payMethod" value="CASH" class="accent-primary"/>
+              <span>Cash at Gate</span>
+            </label>
+          </div>
+
+          <button type="submit" id="completeTxBtn" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-primary hover:bg-primary-container text-white font-bold text-xs flex items-center justify-center gap-2 shadow-md transition-all">
+            <span class="material-symbols-outlined text-18px">check_circle</span>
+            <span>Complete Transaction & Generate QR Code</span>
+          </button>
+        </div>
+      </form>
+
+      <!-- Completed Transaction & QR Result Card -->
+      <div id="txResultCard" class="hidden mt-4 p-5 rounded-2xl bg-gradient-to-br from-white to-surface-container-low border-2 border-primary/30 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="space-y-2 text-center md:text-left">
+          <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-primary text-white">
+            <span class="material-symbols-outlined text-14px">verified</span>
+            Transaction Recorded & Lot Status: COMPLETED
+          </span>
+          <h3 class="text-xl font-extrabold text-on-surface">CPCB Form-6 Handover Manifest</h3>
+          <p class="text-xs text-on-surface-variant max-w-md">
+            The weight, settlement, and GPS geo-tag have been locked in the database. Scan the QR code below for official digital manifest verification.
+          </p>
+          <div class="flex flex-wrap items-center gap-3 pt-2 text-xs font-bold text-on-surface">
+            <span class="bg-surface-container px-3 py-1 rounded-lg">Lot: <strong id="resLotId">-</strong></span>
+            <span class="bg-surface-container px-3 py-1 rounded-lg">Weight: <strong id="resWeight">-</strong></span>
+            <span class="bg-surface-container px-3 py-1 rounded-lg text-primary">Amount: <strong id="resPrice">-</strong></span>
+          </div>
+        </div>
+
+        <div class="p-3 bg-white rounded-xl shadow-md border border-surface-container text-center flex-shrink-0">
+          <img id="qrImage" alt="Transaction QR Code" class="w-36 h-36 mx-auto object-contain"/>
+          <p class="text-[10px] font-bold text-on-surface-variant mt-1.5">Official Digital Manifest QR</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Leaflet.js Library -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <!-- Interactive Map & Operations Script -->
+  <script>
+    // State
+    let map = null;
+    let markersLayer = null;
+    let userGpsMarker = null;
+    let userLocation = [19.0760, 72.8777]; // Default: Mumbai / Western India hub
+    let activeCategory = "";
+
+    // DOM Elements
+    const gpsStatusMessage = document.getElementById("gpsStatusMessage");
+    const gpsIndicatorDot = document.getElementById("gpsIndicatorDot");
+    const recenterGpsBtn = document.getElementById("recenterGpsBtn");
+    const facilitiesCountText = document.getElementById("facilitiesCountText");
+    const matchedCount = document.getElementById("matchedCount");
+    const recyclerCardsGrid = document.getElementById("recyclerCardsGrid");
+    const categoryFilterBtns = document.querySelectorAll(".category-filter-btn");
+
+    const settlementForm = document.getElementById("settlementForm");
+    const settleLotId = document.getElementById("settleLotId");
+    const settleWeight = document.getElementById("settleWeight");
+    const settlePrice = document.getElementById("settlePrice");
+    const completeTxBtn = document.getElementById("completeTxBtn");
+    const txResultCard = document.getElementById("txResultCard");
+    const resLotId = document.getElementById("resLotId");
+    const resWeight = document.getElementById("resWeight");
+    const resPrice = document.getElementById("resPrice");
+    const qrImage = document.getElementById("qrImage");
+
+    // Initialize Leaflet Map
+    function initMap() {
+      map = L.map('map', {
+        zoomControl: true,
+        attributionControl: false
+      }).setView(userLocation, 11);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19
+      }).addTo(map);
+
+      markersLayer = L.layerGroup().addTo(map);
+      L.control.attribution({ position: 'bottomright', prefix: 'Leaflet | © OpenStreetMap' }).addTo(map);
+
+      // Attempt Browser GPS Geolocation
+      acquireBrowserGps();
+    }
+
+    // Acquire Browser GPS Position
+    function acquireBrowserGps() {
+      if (!navigator.geolocation) {
+        gpsStatusMessage.textContent = "GPS not supported · Using Regional Hub";
+        gpsIndicatorDot.classList.remove("bg-blue-600", "animate-ping");
+        gpsIndicatorDot.classList.add("bg-outline");
+        return;
+      }
+
+      gpsStatusMessage.textContent = "Acquiring GPS location...";
+
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          userLocation = [pos.coords.latitude, pos.coords.longitude];
+          gpsStatusMessage.textContent = `GPS Active: ${pos.coords.latitude.toFixed(4)}, ${pos.coords.longitude.toFixed(4)}`;
+          gpsIndicatorDot.classList.remove("animate-ping");
+          gpsIndicatorDot.classList.add("bg-blue-600");
+
+          // Add User GPS Marker
+          if (userGpsMarker) {
+            userGpsMarker.setLatLng(userLocation);
+          } else {
+            const gpsIcon = L.divIcon({
+              className: 'user-gps-pin',
+              html: `<div style="width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-size:14px;">📍</div>`,
+              iconSize: [30, 30],
+              iconAnchor: [15, 15]
+            });
+
+            userGpsMarker = L.marker(userLocation, { icon: gpsIcon })
+              .bindPopup("<b>Your Current Position</b><br>GPS Geolocation Active")
+              .addTo(map);
+          }
+
+          map.setView(userLocation, 12, { animate: true });
+        },
+        (err) => {
+          console.debug("GPS permission / timeout:", err);
+          gpsStatusMessage.textContent = "GPS Unavailable · Default Hub Active";
+          gpsIndicatorDot.classList.remove("animate-ping");
+          gpsIndicatorDot.classList.add("bg-outline");
+        },
+        { enableHighAccuracy: true, timeout: 8000, maximumAge: 60000 }
+      );
+    }
+
+    // Recenter map on GPS
+    recenterGpsBtn.addEventListener("click", () => {
+      if (userGpsMarker) {
+        map.setView(userGpsMarker.getLatLng(), 13, { animate: true });
+        userGpsMarker.openPopup();
+      } else {
+        acquireBrowserGps();
+      }
+    });
+
+    // Custom Green Recycler Pin Icon
+    function createRecyclerIcon(number) {
+      return L.divIcon({
+        className: 'custom-recycler-pin',
+        html: `<div style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;">♻️</div>`,
+        iconSize: [36, 36],
+        iconAnchor: [18, 18],
+        popupAnchor: [0, -18]
+      });
+    }
+
+    // Fetch matching recyclers from /api/recyclers/match?category=...
+    async function loadMatchingRecyclers(category = "") {
+      activeCategory = category;
+      const url = category ? `/api/recyclers/match?category=${encodeURIComponent(category)}` : `/api/recyclers/match`;
+
+      try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Failed to load facilities");
+
+        const data = await response.json();
+        const recyclers = Array.isArray(data) ? data : (data.recyclers || []);
+        renderRecyclerMarkers(recyclers);
+      } catch (e) {
+        console.error("Error loading recyclers:", e);
+        recyclerCardsGrid.innerHTML = `
+          <div class="col-span-full p-4 rounded-xl bg-error/10 text-error text-xs font-semibold text-center">
+            Could not retrieve recycler locations: ${e.message}
+          </div>
+        `;
+      }
+    }
+
+    // Render Markers on Map & Cards Below
+    function renderRecyclerMarkers(recyclers) {
+      if (!map || !markersLayer) return;
+
+      markersLayer.clearLayers();
+      recyclerCardsGrid.innerHTML = "";
+
+      facilitiesCountText.textContent = `${recyclers.length} facilities`;
+      matchedCount.textContent = recyclers.length;
+
+      if (!recyclers || recyclers.length === 0) {
+        recyclerCardsGrid.innerHTML = `
+          <div class="col-span-full p-4 rounded-xl bg-surface-container-low text-on-surface-variant text-xs font-semibold text-center">
+            No facilities currently matching "${activeCategory}".
+          </div>
+        `;
+        return;
+      }
+
+      const bounds = [];
+      if (userGpsMarker) {
+        bounds.push(userGpsMarker.getLatLng());
+      }
+
+      recyclers.forEach((r, idx) => {
+        const lat = parseFloat(r.lat || r.latitude);
+        const lng = parseFloat(r.long || r.lng || r.longitude);
+
+        if (!isNaN(lat) && !isNaN(lng)) {
+          bounds.push([lat, lng]);
+
+          const marker = L.marker([lat, lng], {
+            icon: createRecyclerIcon(idx + 1)
+          });
+
+          // Materials badges
+          let materialsHtml = "";
+          if (Array.isArray(r.accepted_materials)) {
+            materialsHtml = r.accepted_materials.map(m => `<span style="background:#eaedff; color:#00652c; padding:2px 6px; border-radius:4px; font-size:10px; font-weight:700;">${m}</span>`).join(" ");
+          } else if (r.accepted_materials) {
+            materialsHtml = `<span style="background:#eaedff; color:#00652c; padding:2px 6px; border-radius:4px; font-size:10px; font-weight:700;">${r.accepted_materials}</span>`;
+          }
+
+          const popupHtml = `
+            <div style="font-family:'Plus Jakarta Sans',sans-serif; min-width:200px;">
+              <div style="font-size:13px; font-weight:800; color:#131b2e; margin-bottom:2px;">${r.name || 'Verified Recycler'}</div>
+              <div style="font-size:11px; color:#6f7a6e; margin-bottom:6px;">${r.address || 'Certified Facility'}</div>
+              <div style="margin-bottom:6px; display:flex; flex-wrap:wrap; gap:3px;">${materialsHtml}</div>
+              <div style="font-size:10px; font-weight:800; color:#00652c; border-top:1px solid #eaedff; padding-top:4px;">
+                ✓ CPCB Authorized Facility
+              </div>
+            </div>
+          `;
+
+          marker.bindPopup(popupHtml);
+          markersLayer.addLayer(marker);
+
+          // Card in grid below
+          const card = document.createElement("div");
+          card.className = "p-3.5 rounded-xl bg-surface-container-low hover:bg-surface-container border border-surface-container transition-all cursor-pointer flex flex-col justify-between";
+          card.innerHTML = `
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-xs text-on-surface truncate">${r.name || 'Certified Facility'}</span>
+                <span class="text-[10px] font-extrabold text-primary bg-primary/10 px-1.5 py-0.5 rounded">CPCB Active</span>
+              </div>
+              <p class="text-[11px] text-on-surface-variant line-clamp-2 mt-1">${r.address || 'Processing Facility'}</p>
+            </div>
+            <div class="mt-3 pt-2 border-t border-surface-container flex items-center justify-between text-[10px] text-on-surface-variant font-medium">
+              <span>📍 ${lat.toFixed(3)}, ${lng.toFixed(3)}</span>
+              <span class="font-bold text-primary hover:underline">Focus ↗</span>
+            </div>
+          `;
+
+          card.addEventListener("click", () => {
+            map.setView([lat, lng], 14, { animate: true });
+            marker.openPopup();
+          });
+
+          recyclerCardsGrid.appendChild(card);
+        }
+      });
+
+      if (bounds.length > 0) {
+        map.fitBounds(bounds, { padding: [40, 40], maxZoom: 13 });
+      }
+    }
+
+    // Category Filter Buttons Handler
+    categoryFilterBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        categoryFilterBtns.forEach(b => {
+          b.className = "category-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-surface-container text-on-surface hover:bg-surface-container-high transition-all";
+        });
+        btn.className = "category-filter-btn px-3 py-1.5 rounded-lg text-xs font-bold bg-primary text-white transition-all shadow-sm";
+        loadMatchingRecyclers(btn.dataset.category || "");
+      });
+    });
+
+    // Handle Settlement Form Submission -> POST /api/transactions/complete
+    settlementForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const lotId = settleLotId.value.trim();
+      const weight = parseFloat(settleWeight.value);
+      const price = parseFloat(settlePrice.value);
+      const payMethod = document.querySelector('input[name="payMethod"]:checked')?.value || "UPI";
+
+      completeTxBtn.disabled = true;
+      completeTxBtn.classList.add("opacity-80", "cursor-not-allowed");
+
+      try {
+        const response = await fetch("/api/transactions/complete", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            lot_id: lotId,
+            final_weight: weight,
+            final_price: price,
+            payment_status: `${payMethod}_COMPLETED`
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error(`Server returned HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        // Update result display
+        resLotId.textContent = `#LOT-${lotId}`;
+        resWeight.textContent = `${weight} kg`;
+        resPrice.textContent = `₹${price.toLocaleString('en-IN')}`;
+        
+        // Fetch generated QR code image
+        qrImage.src = `/api/transactions/${encodeURIComponent(lotId)}/qr?ref=CPCB-FORM6-LOT-${encodeURIComponent(lotId)}-PRICE-INR-${price}`;
+
+        txResultCard.classList.remove("hidden");
+        txResultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+      } catch (err) {
+        console.error("Settlement error:", err);
+        alert(`Failed to complete transaction: ${err.message}`);
+      } finally {
+        completeTxBtn.disabled = false;
+        completeTxBtn.classList.remove("opacity-80", "cursor-not-allowed");
+      }
+    });
+
+    // Bootstrapping on DOM Load
+    window.addEventListener("DOMContentLoaded", () => {
+      initMap();
+      loadMatchingRecyclers();
+    });
+  </script>
+</body>
+</html>
